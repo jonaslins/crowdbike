@@ -38,10 +38,9 @@
 				        </p:column>
 				        <f:facet name="footer">
 				        	<p:growl id="message" showDetail="true" />
-				            <p:commandButton icon="ui-icon-plus" value="New user" />
+				            <p:commandButton icon="ui-icon-plus" value="New user" onclick="PF('dlg').show();"/>
 				            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />				         
-				            <p:commandButton value="Details" icon="ui-icon-search"/>
-				            <p:commandButton value="Remove" icon="ui-icon-close" actionListener="#{userbean.deleteUser(user)}" update="message">
+				            <p:commandButton value="Remove" icon="ui-icon-close" actionListener="#{userbean.deleteUser(userbean.selectedUser)}" update="message">
 						        
 						        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
 						    </p:commandButton>	
@@ -58,6 +57,25 @@
 	        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 	        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
     	</p:confirmDialog>
+    	
+    	<p:dialog header="Adicionar usuário" widgetVar="dlg" resizable="false">
+		    <h:outputText value="TODO formulario" />
+			   
+	        <h:panelGrid columns="2" cellpadding="5">  
+	            <h:outputLabel for="username" value="Username:" />  
+	            <p:inputText value="#{userbean.username}" id="username" required="true" label="username"/>  
+	              
+	            <h:outputLabel for="password" value="Password:" />  
+	            <h:inputSecret value="#{userbean.password}"  id="password" required="true" label="password" />  
+	              
+	            <f:facet name="footer">  
+	                <p:commandButton id="addBtn" value="Adicionar"    
+	                    action="#{userbean.createUser}" oncomplete="PF('dlg').hide();"/>  
+	            </f:facet>  
+	        </h:panelGrid>  
+	          
+		</p:dialog>
+    	
     	
     </h:form>
 	</ui:define>

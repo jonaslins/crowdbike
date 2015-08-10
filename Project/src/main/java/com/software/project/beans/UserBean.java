@@ -23,6 +23,9 @@ public class UserBean {
 	private List<User> users;
 	private User selectedUser;
 	
+	private String username;
+	private String password;
+	
 	@Resource
 	private LoginService loginservice;
 	
@@ -32,6 +35,19 @@ public class UserBean {
 	@PostConstruct
 	public void getInit(){
 		this.user = loginservice.getUser();
+	}
+	
+	public void createUser() throws Exception{
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		userService.createUser(user);
+	}
+	
+	public void updateUser(User user) throws Exception{
+		user.setUsername(username);
+		user.setPassword(password);
+		userService.updateUser(user);
 	}
 	
 	public void deleteUser(User user) throws Exception{
@@ -74,6 +90,22 @@ public class UserBean {
 
 	public void setSelectedUser(User selectedUser) {
 		this.selectedUser = selectedUser;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

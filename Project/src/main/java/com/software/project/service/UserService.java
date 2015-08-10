@@ -10,4 +10,10 @@ public interface UserService {
 
 	public void deleteUser(User user) throws Exception;
 
+	public void createUser(User user) throws Exception;
+
+	public User getUserByUsername(String username);
+
+	public User updateUser(User user) throws Exception;
+
 }

@@ -26,4 +26,18 @@ public class UserDAOImpl extends GenericDAOImp<User, Long> implements UserDAO, S
 		}
 		return (User) l.get(0);
 	}
+
+	@Override
+	public User getByUsername(String username) {
+		String query = "FROM User u where u.username = ?";
+		Query q = getEntityManager().createQuery(query);
+		q.setParameter(1, username);
+
+		List l = q.getResultList();
+
+		if (l == null || l.isEmpty() || l.size() > 1) {
+			return null;
+		}
+		return (User) l.get(0);
+	}
 }

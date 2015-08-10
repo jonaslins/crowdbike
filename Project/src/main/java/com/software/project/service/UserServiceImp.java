@@ -29,4 +29,21 @@ public class UserServiceImp implements UserService{
 		
 	}
 
+	@Override
+	public void createUser(User user) throws Exception {
+		dao.createNew(user);		
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return dao.getByUsername(username);
+	}
+
+	@Override
+	public User updateUser(User user) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.update(user);
+	}
+
 }
