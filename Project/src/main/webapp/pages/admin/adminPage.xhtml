@@ -20,6 +20,12 @@
 	<h:form id="form">           
 	    <p:growl id="message" showDetail="true" />
  	    <p:accordionPanel multiple="true">
+ 	    
+ 	     	<p:tab title="Admin Info">
+ 	        	<h:outputLabel for="username" value="Username: " />    		
+	        	<h:outputText id="username" value="#{userbean.user.username}"/>	        	
+	        </p:tab>
+	        
 	        <p:tab title="User Management">
 	            <h:panelGrid>
 	                <p:dataTable id="singleDT" var="user" value="#{userbean.users}" selectionMode="single" selection="#{userbean.selectedUser}" rowKey="#{user.id}"
