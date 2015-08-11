@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
 import org.springframework.context.annotation.Scope;
@@ -25,6 +26,10 @@ public class UserBean {
 	
 	private String username;
 	private String password;
+	
+	private String newPassword;
+	private String currentPassword;
+	private String confirmPassword;
 	
 	@Resource
 	private LoginService loginservice;
@@ -52,13 +57,24 @@ public class UserBean {
 	
 	public void deleteUser(User user) throws Exception{
 		userService.deleteUser(user);
-		addMessage("Usuário deletado", "Operação realizada com sucesso");
+		addMessage("Usuário deletado", "Operação realizada com sucesso", FacesMessage.SEVERITY_INFO);
 	}
 	
-	public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+	public void addMessage(String summary, String detail, Severity severity) {
+        FacesMessage message = new FacesMessage(severity, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+	
+	public void changeUserPassword() throws Exception{
+		if(currentPassword.equals(user.getPassword())){
+			if(newPassword.equals(confirmPassword)){
+				user.setPassword(newPassword);
+				userService.updateUser(user);
+			}
+		}else{
+			addMessage("Senha atual não confere", "", FacesMessage.SEVERITY_ERROR);
+		}
+	}
 
 	public User getUser() {
 		return user;
@@ -106,6 +122,30 @@ public class UserBean {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public String getCurrentPassword() {
+		return currentPassword;
+	}
+
+	public void setCurrentPassword(String currentPassword) {
+		this.currentPassword = currentPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 	
 }

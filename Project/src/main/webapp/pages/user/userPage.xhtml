@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
-    
-<h:head>
-	<title>User Page - Spring Security</title>
-</h:head>
-<h:body>
-	<h:form>
-		<h:messages />
-		<h:outputText
-			value="Você possui a permissão ROLE_USER!" />
-	</h:form>
-</h:body>
-</html>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+	
+	<ui:define name="header">
+		<ui:include src="/util/header.xhtml" />
+	</ui:define>
+	
+	<ui:define name="mainMenu">
+		<ui:include src="/util/menu.xhtml" />
+	</ui:define>
+	
+	<ui:define name="content">
+	<h:form id="form">           
+	    <p:growl id="message" showDetail="true" />
+ 	    <p:accordionPanel multiple="true">
+ 	    	<p:tab title="User info">
+	 	    	<p:panelGrid columns="2">
+				    <h:outputText value="Name:" />
+				    <h:outputText value="#{userbean.user.username}" />
+				 
+				    <h:outputText value="Password:" />  
+				    <p:commandButton value="Change password" icon="ui-icon-pencil" onclick="PF('dlg').show();"/>
+				</p:panelGrid>
+	        </p:tab>
+	    </p:accordionPanel>
+	    
+	    <p:dialog header="Change password" widgetVar="dlg" resizable="false">
+	    	<p:messages id="messages" showDetail="true" />
+	        <h:panelGrid id="passwordGrid" columns="2" cellpadding="5">  
+	            <h:outputLabel for="currentPassword" value="Current password: *" />  
+	            <p:password value="#{userbean.currentPassword}" id="currentPassword" required="true" label="currentPassword"/>  
+	              
+	            <h:outputLabel for="newPassword" value="New password: *"/>  
+	            <p:password value="#{userbean.newPassword}" id="newPassword" required="true" label="newPassword"/>
+	            
+	            <h:outputLabel for="confirmPassword" value="Confirm password: *" />  
+	            <p:password value="#{userbean.confirmPassword}" id="confirmPassword" required="true" label="confirmPassword"/>
+	              
+	            <f:facet name="footer">  
+	                <p:commandButton id="addBtn" value="Save" update="messages" actionListener="#{userbean.changeUserPassword}" onclick="PF('dlg').close();"/>  
+	            </f:facet>  
+	        </h:panelGrid>  
+	          
+		</p:dialog>
+	    
+    </h:form>
+	</ui:define>
+	
+	<ui:define name="footer">
+		<ui:include src="/util/footer.xhtml" />
+	</ui:define>
+	
+</ui:composition>
