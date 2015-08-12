@@ -5,17 +5,17 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+	xmlns:sec="http://www.springframework.org/security/tags">
 
 	
 		<h:form id="formMenu">	
 			      <p:menubar autoSubmenuDisplay="false" style="border: none;">
     				     <p:submenu label="Secoes" style="z-index:10000;" >
     				      <p:menuitem value="Home" icon="ui-icon-home" url="/pages/home.jsf" />
-    				     <p:submenu label="Admin">  
+    				     <p:submenu label="Admin" rendered="#{sec:areAnyGranted('ROLE_ADMIN')}">  
 						      <p:menuitem value="Admin" url="/pages/admin/adminPage.jsf" />
 					     </p:submenu>
-					     <p:submenu label="User">  
+					     <p:submenu label="User" rendered="#{sec:areAnyGranted('ROLE_USER')}">  
 						      <p:menuitem value="User" url="/pages/user/userPage.jsf" />
 					     </p:submenu>
 					</p:submenu>

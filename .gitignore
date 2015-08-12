@@ -1,9 +1,8 @@
-/build
-/.settings
-/.classpath
+build
 .classpath
 *.class
 *.tmp
 .metadata
 .recommenders
-.metadata/*
+target
+.settings
