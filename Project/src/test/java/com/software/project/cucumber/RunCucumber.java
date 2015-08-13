@@ -1,4 +1,4 @@
-package com.cucumber;
+package com.software.project.cucumber;
 
 import org.junit.runner.RunWith;
 
@@ -9,8 +9,6 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
     format = "pretty"     
 )
-//tags = {"~@Ignore"},
-//features = "src/test/resources/com/cucumber/"  
 public class RunCucumber {  
 	
 }

@@ -1,6 +1,6 @@
-package com.cucumber;
+package com.software.project.cucumber.steps;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -59,7 +59,7 @@ public class UserSteps{
 	
 	@Then("^the user with username \"([^\"]*)\" is properly stored by the system$")
 	public void the_user_with_username_is_properly_stored_by_the_system(String arg1) throws Throwable{
-		//assertNotNull(userService.getUserByUsername(arg1));
+		assertNotNull(userService.getUserByUsername(arg1));
 	}
 	
 	

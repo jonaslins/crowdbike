@@ -4,12 +4,23 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
 
 	
    <div id="topo">
 	
-		<img alt="" src="#{facesContext.externalContext.requestContextPath}/images/logo.png" />
+		<b:navBar brandImg="#{facesContext.externalContext.requestContextPath}/images/logo.png" 
+				brandHref="#{facesContext.externalContext.requestContextPath}" fixed="top">
+		    <b:navbarLinks>
+		        <b:navLink value="MAP" href="#"></b:navLink>
+		        <b:navLink value="ABOUT" href="#"></b:navLink>
+		        <b:navLink value="STAY TUNED" href="#"></b:navLink>
+		    </b:navbarLinks>
+		    <b:navbarLinks pull="right">
+		        <b:navLink value="Login" href="#"></b:navLink>
+		    </b:navbarLinks>
+		</b:navBar>		
 
    </div>		
 </ui:composition>
