@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.software.project.dao.RoleDAO;
 import com.software.project.dao.UserDAO;
+import com.software.project.dao.VerificationTokenDAO;
+import com.software.project.entities.Role;
 import com.software.project.entities.User;
+import com.software.project.entities.VerificationToken;
 
 @Service("UserService")
 @Transactional(propagation=Propagation.REQUIRED)
@@ -22,6 +25,9 @@ public class UserServiceImp implements UserService{
 	
 	@Resource
 	private RoleDAO roleDAO;
+	
+	@Resource
+	private VerificationTokenDAO verificationTokenDAO;
 	
 	@Override
 	public List<User> getAll() {
@@ -35,17 +41,18 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public void createUser(User user) throws Exception {
-		User fetchUser = getUserByUsername(user.getUsername());
-		if(fetchUser!=null){
-			throw new IllegalArgumentException(
-					"Usuário \""+user.getUsername()+"\" já existe! ");
-		}
-		user.setRoles(Arrays.asList(roleDAO.getByName("ROLE_USER")));
-		dao.createNew(user);
+	public User createUser(User user) throws Exception {
+		return dao.createNew(user);
 		
 	}
-
+	
+	@Override
+	public User saveEnabledUser(User user) throws Exception {
+		user.setEnabled(true);
+		Role role = roleDAO.getByName("ROLE_USER");
+		user.setRoles(Arrays.asList(role));
+		return dao.update(user);
+	}
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO Auto-generated method stub
@@ -56,6 +63,18 @@ public class UserServiceImp implements UserService{
 	public User updateUser(User user) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.update(user);
+	}
+	
+	@Override
+	public VerificationToken getVerificationToken(final String token) {
+		return verificationTokenDAO.getByToken(token);
+	}
+
+	@Override
+	public VerificationToken createVerificationToken(User user, String token) throws Exception {
+		VerificationToken verificationToken = new VerificationToken(token, user);
+		return verificationTokenDAO.createNew(verificationToken);
+		
 	}
 
 }

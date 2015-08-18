@@ -30,6 +30,7 @@
 		<intercept-url pattern="/pages/*" access="isAuthenticated()" />
 		<intercept-url pattern="/pages/user/*" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/pages/admin/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/pages/register/*" access="permitAll" />
 		<form-login login-page="/index.jsf" default-target-url="/index.jsf"
 			authentication-failure-url="/index.jsf?erro=true"
 			always-use-default-target="true" />

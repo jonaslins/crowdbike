@@ -30,6 +30,11 @@ public class Authenticator implements AuthenticationProvider {
 	public String login() {
 		try {
 			User user = service.login(username, password);
+			if(user.isEnabled()){
+//				TODO CONTA CONFIRMADA
+			}else{
+//				TODO CONTA NAO CONFIRMADA
+			}
 			loginSpringSecurity(user);
 			session.setUser(user);
 			return "homePage";

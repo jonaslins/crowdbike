@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -40,6 +41,9 @@ public class User implements UserDetails{
 	@Column(name = "user_password")
 	private String password;
 	
+	@Column(name = "enabled")
+    private boolean enabled;
+	
 	@ManyToMany
 	@JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -48,6 +52,13 @@ public class User implements UserDetails{
 	@OneToMany(fetch = FetchType.LAZY , orphanRemoval=true, cascade=CascadeType.ALL , mappedBy = "user")
 	private Set<Ocorrencia> ocorrencias = new HashSet<Ocorrencia>();
 	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+	private VerificationToken verificationToken;
+	     
+	public User() {
+		super();
+		this.enabled = false;
+	}
 	
 	public Long getId() {
 		return id;
@@ -115,7 +126,7 @@ public class User implements UserDetails{
 	@Transient
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return this.enabled;
 	}
 
 	public Set<Ocorrencia> getOcorrencias() {
@@ -124,6 +135,11 @@ public class User implements UserDetails{
 
 	public void setOcorrencias(Set<Ocorrencia> ocorrencias) {
 		this.ocorrencias = ocorrencias;
+	}
+
+	public void setEnabled(boolean enabled) {
+		// TODO Auto-generated method stub
+		this.enabled = enabled;
 	}
   
 	

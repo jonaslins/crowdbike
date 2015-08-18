@@ -39,5 +39,13 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>registrationConfirm</from-outcome>
+			<to-view-id>/pages/register/registrationConfirm.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>
