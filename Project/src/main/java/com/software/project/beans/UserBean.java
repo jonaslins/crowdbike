@@ -70,6 +70,8 @@ public class UserBean {
 			if(newPassword.equals(confirmPassword)){
 				user.setPassword(newPassword);
 				userService.updateUser(user);
+			}else{
+				addMessage("Nova senha e confirmação de senha não conferem", "", FacesMessage.SEVERITY_ERROR);
 			}
 		}else{
 			addMessage("Senha atual não confere", "", FacesMessage.SEVERITY_ERROR);

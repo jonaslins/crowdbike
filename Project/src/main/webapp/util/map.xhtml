@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+
+	<div id="map">
+
+		<p:tabView id="tabView">
+
+
+			<p:tab id="tab1" title="Mapa">
+				<p:gmap center="-8.054277,-34.881256" widgetVar="mapVar" zoom="13"
+					type="ROADMAP" model="#{mapBean.advancedModel}" streetView="false"
+					style="width:100%;height:450px">
+
+
+					<p:ajax event="overlaySelect" listener="#{mapBean.onMarkerSelect}" />
+
+					<p:gmapInfoWindow>
+						<p:outputPanel
+							style="text-align:center;display:block;margin:auto:">
+
+							<h:outputText id="endereco"
+								value="#{mapBean.ocorrenciaSelected.endereco}" />
+							<br />
+							<h:outputLabel for="title" value="Tipo de Acidente: " />
+							<h:outputText id="title"
+								value="#{mapBean.ocorrenciaSelected.title}" />
+							<br />
+							<h:outputLabel for="inlineDate" value="Data: " />
+							<h:outputText
+								value="#{mapBean.ocorrenciaSelected.dataOcorrencia}"
+								id="inlineDate">
+								<f:convertDateTime pattern="d-M-yyyy" />
+							</h:outputText>
+
+						</p:outputPanel>
+
+					</p:gmapInfoWindow>
+				</p:gmap>
+			</p:tab>
+
+			<p:tab id="tab2" title="Gráficos e Estatisticas">
+				<h3>
+					<h:outputLabel
+						value="Qtd de Acidentes de Bicicleta: #{mapBean.qtdOcorrencias}"
+						style="color:#C60000" />
+				</h3>
+				<p:pieChart id="sample" value="#{mapBean.pieModel}"
+					legendPosition="w" showDataLabels="true" fill="true"
+					sliceMargin="5" diameter="150" title="Acidentes de Bicicleta"
+					style="width:400px;height:300px" />
+			</p:tab>
+
+			<p:tab id="tab3" title="Lista de Dados">
+				<p:dataTable var="ocorrencia" value="#{mapBean.ocorrencias}">
+					<p:column headerText="Tipo">
+						<h:outputText value="#{ocorrencia.title}" />
+					</p:column>
+
+					<p:column headerText="Endereco">
+						<h:outputText value="#{ocorrencia.endereco}">
+							<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Data">
+						<h:outputText value="#{ocorrencia.dataOcorrencia}" />
+					</p:column>
+
+				</p:dataTable>
+			</p:tab>
+
+		</p:tabView>
+
+	</div>
+
+
+</ui:composition>

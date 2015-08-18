@@ -1,5 +1,6 @@
 package com.software.project.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.software.project.dao.RoleDAO;
 import com.software.project.dao.UserDAO;
 import com.software.project.entities.User;
 
@@ -17,6 +19,9 @@ public class UserServiceImp implements UserService{
 
 	@Resource
 	private UserDAO dao;
+	
+	@Resource
+	private RoleDAO roleDAO;
 	
 	@Override
 	public List<User> getAll() {
@@ -31,7 +36,14 @@ public class UserServiceImp implements UserService{
 
 	@Override
 	public void createUser(User user) throws Exception {
-		dao.createNew(user);		
+		User fetchUser = getUserByUsername(user.getUsername());
+		if(fetchUser!=null){
+			throw new IllegalArgumentException(
+					"Usuário \""+user.getUsername()+"\" já existe! ");
+		}
+		user.setRoles(Arrays.asList(roleDAO.getByName("ROLE_USER")));
+		dao.createNew(user);
+		
 	}
 
 	@Override
