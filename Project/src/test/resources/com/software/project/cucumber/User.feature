@@ -10,7 +10,6 @@ Feature: User
 	    
 	Scenario: user login web
 	    Given I am the at the Home page
-	    And I have a account with username "user" and password "user"
 	    When I click on login link
 	    And I properly fill the fields with username "user" and password "user" 
 	    And click the login button

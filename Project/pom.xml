@@ -289,6 +289,12 @@
 			<artifactId>spring-context</artifactId>
 			<scope>compile</scope>
 			<version>${org.springframework.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -533,6 +539,8 @@
 				<version>2.2</version>
 				<configuration>
 					<path>/${artifactId}</path>
+					<port>8080</port>
+					<hostName>localhost</hostName>
 				</configuration>
 				<executions>
 					<execution>

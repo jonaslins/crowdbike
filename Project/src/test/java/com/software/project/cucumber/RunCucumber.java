@@ -6,6 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
+@CucumberOptions(glue="com.software.project.cucumber.steps")
 public class RunCucumber {  
 	
 }
