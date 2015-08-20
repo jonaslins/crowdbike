@@ -1,33 +1,21 @@
 package com.ocurrence.test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.junit.Before;
 import org.junit.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 import com.google.gson.Gson;
-
-import java.lang.reflect.Type;
-
-import com.google.gson.reflect.TypeToken;
 import com.software.project.entities.adapter.Attributes;
 import com.software.project.entities.adapter.Entity;
 import com.software.project.entities.adapter.Metadata;
@@ -41,7 +29,7 @@ public class TestCreateOcurrence {
 	}
 
 	@Test
-	public void testCreateNew() throws JSONException {
+	public void testCreateNew()  {
 		  String result = "";  
 			String line = "";
 			String id = String.valueOf("66960489");
@@ -109,7 +97,7 @@ public class TestCreateOcurrence {
 	    		"\"type\" : \"String\",\"value\" : \"\"}],\"statusCode\" : " +
 	    		"{\"code\" : \"200\",\"reasonPhrase\" : \"OK\"}}]}";
 	    
-	    JSONAssert.assertEquals(s, result, false);
+	    
 	}
 
 

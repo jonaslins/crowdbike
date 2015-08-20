@@ -1,18 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.springframework.samples.service.service</groupId>
-  <artifactId>Project</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  
-   	<properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.samples.service.service</groupId>
+	<artifactId>project</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<env>dev</env>
 		<java.version>1.7</java.version>
-		<org.springframework.version>3.1.0.RELEASE</org.springframework.version>
-		
+		<org.springframework.version>4.1.6.RELEASE</org.springframework.version>
+		<org.springframework.security.version>4.0.0.RC1</org.springframework.security.version>
 	</properties>
-		
+
 	<repositories>
 
 		<repository>
@@ -21,53 +23,64 @@
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
-       
-       <repository> 
-           <id>maven2-repository.dev.java.net</id> 
-           <name>Java.net Repository for Maven</name> 
-           <url>http://download.java.net/maven/2</url> 
-       </repository> 
+
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2</url>
+		</repository>
 
 		<repository>
 			<id>maven-restlet</id>
 			<name>Public online Restlet repository</name>
 			<url>http://maven.restlet.org</url>
 		</repository>
+
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
 	</repositories>
 
 	<dependencies>
-	
+
 		<dependency>
-		    <groupId>net.bootsfaces</groupId>
-		    <artifactId>bootsfaces</artifactId>
-		    <version>0.6.6</version>
-		    <scope>compile</scope>
+			<groupId>net.bootsfaces</groupId>
+			<artifactId>bootsfaces</artifactId>
+			<version>0.6.6</version>
+			<scope>compile</scope>
 		</dependency>
-		<!-- Cucumber -->
-		<dependency>
-	        <groupId>info.cukes</groupId>
-	        <artifactId>cucumber-core</artifactId>
-	        <version>1.1.5</version>
-	        <scope>test</scope>
-	    </dependency>
-	    <dependency>
-	        <groupId>info.cukes</groupId>
-	        <artifactId>cucumber-spring</artifactId>
-	        <version>1.1.5</version>
-	        <scope>test</scope>
-	    </dependency>
-	    <dependency>
-	        <groupId>info.cukes</groupId>
-	        <artifactId>cucumber-junit</artifactId>
-	        <version>1.1.5</version>
-	        <scope>test</scope>
-	    </dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.11</version>
+		</dependency>
+		<!-- Cucumber -->
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-core</artifactId>
+			<version>1.1.5</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-spring</artifactId>
+			<version>1.1.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>1.1.5</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
@@ -83,14 +96,15 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.3.6</version>
 		</dependency>
-		
-		
-		
+
+
+
 		<!-- J2EE 7 -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- HIBERNATE -->
@@ -100,9 +114,9 @@
 			<version>1.0.1.Final</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-validator</artifactId>
-		    <version>4.2.0.Final</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -116,9 +130,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-          <groupId>org.hibernate</groupId>
-          <artifactId>hibernate-c3p0</artifactId>
-          <version>4.1.8.Final</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>4.1.8.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -136,14 +150,14 @@
 			<artifactId>hibernate-commons-annotations</artifactId>
 			<version>4.0.1.Final</version>
 		</dependency>
-		
+
 		<!-- JTA -->
 		<dependency>
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>
 			<version>1.1</version>
 		</dependency>
-		
+
 
 		<!-- MySQL -->
 		<dependency>
@@ -151,24 +165,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.20</version>
 		</dependency>
-		
-		<!-- rabbitmq -->
-		<dependency>
-		    <groupId>com.rabbitmq</groupId>
-		    <artifactId>amqp-client</artifactId>
-		    <version>3.3.5</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.springframework.amqp</groupId>
-		    <artifactId>spring-rabbit</artifactId>
-		    <version>1.3.5.RELEASE</version>
-		</dependency>
+
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
-				
+
 		<!-- Commons -->
 		<dependency>
 			<groupId>commons-pool</groupId>
@@ -211,13 +214,7 @@
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-       
-       <!-- Esper -->
-        <dependency>
-			<groupId>com.espertech</groupId>
-			<artifactId>esper</artifactId>
-			<version>4.10.0</version>
-		</dependency>
+
 
 		<!-- AOP Alliance -->
 		<dependency>
@@ -233,7 +230,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -246,10 +243,10 @@
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
 		</dependency>
-		<dependency>  
-    		<groupId>org.primefaces.themes</groupId>  
-    		<artifactId>bootstrap</artifactId>  
-    		<version>1.0.10</version>  
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>1.0.10</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -262,14 +259,15 @@
 			<version>2.2.2</version>
 		</dependency>
 		<dependency>
-        <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>3.0.1</version>
-        </dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.1.2</version>
+			<version>1.2</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -279,12 +277,7 @@
 			<scope>compile</scope>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-asm</artifactId>
-			<scope>compile</scope>
-			<version>${org.springframework.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
@@ -334,13 +327,21 @@
 			<scope>compile</scope>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		
-		
-		<!-- Esper -->
 		<dependency>
-			<groupId>com.espertech</groupId>
-			<artifactId>esper</artifactId>
-			<version>4.10.0</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -354,7 +355,11 @@
 			<version>0.9.28</version>
 			<scope>compile</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+		</dependency>
 		<!-- Javassist -->
 		<dependency>
 			<groupId>org.javassist</groupId>
@@ -391,20 +396,22 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- Spring Security Webflow-->
-        <dependency>
-           <groupId>org.springframework.webflow</groupId>
-           <artifactId>spring-faces</artifactId>
-           <version>2.4.1.RELEASE</version>
-        </dependency>
-       
+		<!-- Spring Security Webflow -->
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-faces</artifactId>
+			<version>2.4.1.RELEASE</version>
+		</dependency>
+
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<scope>compile</scope>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
@@ -420,104 +427,74 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<scope>compile</scope>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<scope>compile</scope>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-acl</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-aspects</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-cas</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-crypto</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-openid</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-remoting</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 
-		<!-- AOP dependency -->
+
+		<!-- Gson: Java to Json conversion -->
 		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>2.2</version>
-		</dependency>
-		
- 		<!--  Gson: Java to Json conversion -->
-	     <dependency>
-	      	 <groupId>com.google.code.gson</groupId>
-	      	 <artifactId>gson</artifactId>
-	      	 <version>2.2.4</version>
-	      	 <scope>compile</scope>
-	     </dependency> 
-	     
-	     <dependency>
-    		 <groupId>com.googlecode.json-simple</groupId>
-   			 <artifactId>json-simple</artifactId>
-  			 <version>1.1</version>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+			<scope>compile</scope>
 		</dependency>
 
-		 <dependency>
-		 	<groupId>org.restlet.jee</groupId>
-		 	<artifactId>org.restlet</artifactId>
-		 	<version>2.1.4</version>
-		 </dependency>
-		 <dependency>
-		 	<groupId>org.restlet.jee</groupId>
-		 	<artifactId>org.restlet.ext.json</artifactId>
-		 	<version>2.1.4</version>
-		 </dependency>
-		 <dependency>
-		 	<groupId>org.restlet.jee</groupId>
-		 	<artifactId>org.restlet.ext.spring</artifactId>
-		 	<version>2.1.4</version>
-		 </dependency>
-		 <dependency>
-		 	<groupId>org.restlet.jee</groupId>
-		 	<artifactId>org.restlet.lib.org.json</artifactId>
-		 	<version>2.0</version>
-		 </dependency>
-		 <dependency>
-		 	<groupId>org.restlet.jee</groupId>
-		 	<artifactId>org.restlet.ext.servlet</artifactId>
-		 	<version>2.1.4</version>
-		 </dependency>
-		<!-- Perf4j Mede tempo de exec em app-->
-		 <dependency>
-        <groupId>org.perf4j</groupId>
-        <artifactId>perf4j</artifactId>
-        <version>0.9.16</version>
-        <scope>compile</scope>
-    </dependency>
-		 
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+
+		<!-- Perf4j Mede tempo de exec em app -->
+		<dependency>
+			<groupId>org.perf4j</groupId>
+			<artifactId>perf4j</artifactId>
+			<version>0.9.16</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -525,8 +502,19 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
 				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<warName>${artifactId}</warName>
 					<webResources>
 						<webResource>
 							<directory>${basedir}/src/main/webapp/WEB-INF</directory>
@@ -540,13 +528,56 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<path>/${artifactId}</path>
 				</configuration>
+				<executions>
+					<execution>
+						<id>start-tomcat</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<fork>true</fork>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop-tomcat</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>shutdown</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.18.1</version>
+
+				<executions>
+
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>
+									**/*Cucumber.java
+								</include>
+							</includes>
+						</configuration>
+					</execution>
+
+				</executions>
+
 			</plugin>
 		</plugins>
 	</build>

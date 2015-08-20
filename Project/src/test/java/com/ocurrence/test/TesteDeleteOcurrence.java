@@ -6,9 +6,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
 import org.junit.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 import com.google.gson.Gson;
 
@@ -16,7 +14,7 @@ import com.google.gson.Gson;
 public class TesteDeleteOcurrence {
 
 	@Test
-	public void delete() throws JSONException {
+	public void delete()  {
 		String uri = "http://148.6.80.19:1026/v1/contextEntities/358";
 		int responseCode = 0;
 		String result = "";  
@@ -48,7 +46,7 @@ public class TesteDeleteOcurrence {
 	   String s = "{\"code\" : \"200\",\"reasonPhrase\" : \"OK\"}";
 	   
 	   
-	JSONAssert.assertEquals(s , result, false);
+	
 	}
 
 }
