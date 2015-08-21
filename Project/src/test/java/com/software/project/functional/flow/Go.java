@@ -2,7 +2,7 @@ package com.software.project.functional.flow;
 
 import org.openqa.selenium.WebDriver;
 
-import com.software.project.functional.HomePage;
+import com.software.project.functional.IndexPage;
 import com.software.project.functional.WebPage;
 
 public class Go {

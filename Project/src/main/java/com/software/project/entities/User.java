@@ -60,6 +60,13 @@ public class User implements UserDetails{
 		this.enabled = false;
 	}
 	
+	public User(String username, String password){
+		super();
+		this.username = username;
+		this.password = password;
+		this.enabled = false;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -140,8 +147,6 @@ public class User implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		// TODO Auto-generated method stub
 		this.enabled = enabled;
-	}
-  
-	
+	}	
    
 }
