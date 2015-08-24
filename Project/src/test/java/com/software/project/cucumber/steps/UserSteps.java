@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.software.project.entities.User;
+import com.software.project.functional.HomePage;
 import com.software.project.functional.IndexPage;
 import com.software.project.functional.flow.At;
 import com.software.project.functional.flow.Go;
@@ -38,17 +39,14 @@ public class UserSteps{
 
 	@Autowired
 	public UserService userService;
-	
-	
 
 	@Autowired
 	private WebApplicationContext wac;
 	
-	private static WebDriver driver = new FirefoxDriver();
+	@Autowired
+	private WebDriver driver;
 	
 	private MockMvc mockMvc;
-	
-	private IndexPage indexPage;
 	
 	private User userAux;
 	
@@ -64,12 +62,14 @@ public class UserSteps{
 	public void setUp(){
 		Go.setDriver(driver);
 		At.setDriver(driver);
-		indexPage = PageFactory.initElements(driver, IndexPage.class);
-
+		PageFactory.initElements(driver, IndexPage.class);
+		PageFactory.initElements(driver, HomePage.class);
 	}
+	
 	@AfterClass
 	public static void cleanUp(){
-		driver.quit();
+		//TODO Check better approach to manage the browser during tests
+		//driver.quit();
 	}
 	
 	@Given("^the system has no user with username \"([^\"]*)\"$")
@@ -113,36 +113,32 @@ public class UserSteps{
 
 	@When("^I click on login link$")
 	public void I_click_on_login_link() throws Throwable {
-		
-		(new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(By.id("form:loginLink")));
-		indexPage.clickLoginLink();
+				
+		IndexPage.clickLoginLink();
 		
 	}
 
 	@When("^I properly fill the fields with username \"([^\"]*)\" and password \"([^\"]*)\"$")
 	public void I_properly_fill_the_fields_with_username_and_password(String username, String password) throws Throwable {
 		
-	    indexPage.fillLoginForm(username, password);    
+		IndexPage.fillLoginForm(username, password);    
 	    
 	}
 
 	@When("^click the login button$")
 	public void click_the_login_button() throws Throwable {
 		
-		indexPage.clickLoginButton();
+		IndexPage.clickLoginButton();
 	    
 	}
 
 	@Then("^I'm logged in at the Home page with my \"(.*?)\" username account$")
 	public void i_m_logged_in_at_the_Home_page_with_my_username_account(String username) throws Throwable {
-		
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		assertTrue(user.getUsername().equals(username));
+				
+		assertTrue(At.page(HomePage.URL));
+		assertTrue(HomePage.checkIfLoggedInAtGui(username));
 		
 	}
-	
-	
-	
-	
+		
 
 }

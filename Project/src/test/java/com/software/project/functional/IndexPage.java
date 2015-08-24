@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class IndexPage extends WebPage {
 
@@ -14,35 +16,33 @@ public class IndexPage extends WebPage {
 	}
 
 	@FindBy(id="form:loginLink")
-	private WebElement loginLink;
+	private static WebElement loginLink;
 	
 	@FindBy(id="form:loginButton")
-	private WebElement loginButton;
+	private static WebElement loginButton;
 	
 	@FindBy(id="form:username")
-	private WebElement usernameField;
+	private static WebElement usernameField;
 	
 	@FindBy(id="form:password")
-	private WebElement passwordField;
+	private static  WebElement passwordField;
 
-	public void clickLoginButton() {
+	public static void clickLoginButton() {
 		loginButton.click();
 	}
 	
-	public void clickLoginLink() {
+	public static void clickLoginLink() {
+		(new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(loginLink));
 		loginLink.click();
 	}
 	
-	public void fillLoginForm(String username, String password){
+	public static void fillLoginForm(String username, String password){
 		usernameField.sendKeys(username);
 		passwordField.sendKeys(password);
 	}
 
-	public boolean loggedIn() {
+	public static boolean loggedIn() {
 		return true;		
 	}
-	
-	
-	
 	
 }

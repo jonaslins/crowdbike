@@ -23,7 +23,7 @@
 					<h:panelGroup>
 						<div class="user">
 							<!-- <span>#{msg.global_user_logged} <h:outputText value="#{request.remoteUser}!"/></span> -->
-							<span>Usuário: <h:outputText value="#{userbean.nome}" /></span> | 
+							<span>Usuário: <h:outputText value="#{userbean.nome}" id="username"/></span> | 
 							<a	title="Logout" href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">logout</a>
 						</div>
 					</h:panelGroup>
