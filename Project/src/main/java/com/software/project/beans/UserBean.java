@@ -1,8 +1,6 @@
 package com.software.project.beans;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -12,16 +10,12 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.context.request.WebRequest;
 
 import com.software.project.entities.User;
-import com.software.project.entities.VerificationToken;
 import com.software.project.service.LoginService;
 import com.software.project.service.UserService;
-import com.software.project.util.mail.OnRegistrationCompleteEvent;
 
 @Controller("userbean")
 @Scope("view")
@@ -45,9 +39,6 @@ public class UserBean {
 	@Resource
 	private UserService userService;
 	
-	@Autowired
-	WebRequest webRequest;
-	
 	@PostConstruct
 	public void getInit(){
 		this.user = loginservice.getUser();
@@ -55,44 +46,6 @@ public class UserBean {
 	
 	@Autowired
 	HttpServletRequest request;
-	
-	@Autowired
-	ApplicationEventPublisher eventPublisher;
-	
-	public void createUser() throws Exception{
-		User user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-		User newUser = userService.createUser(user);
-		if(newUser==null){
-			//TODO Send message error
-		}
-		
-		 try {
-		        String appUrl = "http://localhost:8080";
-		        eventPublisher.publishEvent(new OnRegistrationCompleteEvent
-		          (newUser, Locale.forLanguageTag("pt_BR"), appUrl));
-		    } catch (Exception me) {
-		        //TODO send email error
-		    }
-	}
-	
-	public String confirmRegistration(String token) throws Exception {
-//		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-	    VerificationToken verificationToken = userService.getVerificationToken(token);
-	    if (verificationToken == null) {
-//	        TODO VERIFICATION EXPIRED
-	    }
-	     
-	    User user = verificationToken.getUser();
-	    Calendar cal = Calendar.getInstance();
-	    if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-//	         TODO VERIFICATION EXPIRED
-	    } 
-
-	    userService.saveEnabledUser(user); 
-	    return "homePage"; 
-	}
 	
 	public void updateUser(User user) throws Exception{
 		user.setUsername(username);

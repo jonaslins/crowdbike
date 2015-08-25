@@ -14,7 +14,7 @@
 	
 	
 	<ui:define name="content">
-		<f:event listener="#{userbean.confirmRegistration(param['token'])}" type="preRenderView" />
+		<f:event listener="#{confirmAccountBean.confirmRegistration(param['token'])}" type="preRenderView" />
 	
 		<h:outputText value="Resgistrado"></h:outputText>
 		<h:outputText value=" #{param['token']}" />

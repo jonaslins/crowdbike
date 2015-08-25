@@ -23,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.software.project.entities.User;
 import com.software.project.functional.HomePage;
 import com.software.project.functional.IndexPage;
+import com.software.project.functional.SignUpPage;
 import com.software.project.functional.flow.At;
 import com.software.project.functional.flow.Go;
 import com.software.project.service.UserService;
@@ -64,6 +65,7 @@ public class UserSteps{
 		At.setDriver(driver);
 		PageFactory.initElements(driver, IndexPage.class);
 		PageFactory.initElements(driver, HomePage.class);
+		PageFactory.initElements(driver, SignUpPage.class);
 	}
 	
 	@AfterClass
@@ -94,17 +96,9 @@ public class UserSteps{
 		assertNotNull(userAux);
 	    
 	}
-
-	@Given("^I have an account with username \"(.*?)\" and password \"(.*?)\"$")
-	public void i_have_an_account_with_username_and_password(String username, String password) throws Throwable {
-		
-		User user = userService.getUserByUsername(username);
-		assertNotNull(user);		
-		
-	}
 	
 	@Given("^I am at the Index page$")
-	public void i_am_at_the_Index_page() throws Throwable {
+	public void I_am_at_the_Index_page() throws Throwable {
 		
 	    Go.to(IndexPage.URL);
 	    At.page(IndexPage.URL);
@@ -125,8 +119,8 @@ public class UserSteps{
 	    
 	}
 
-	@When("^click the login button$")
-	public void click_the_login_button() throws Throwable {
+	@When("^I click the login button$")
+	public void I_click_the_login_button() throws Throwable {
 		
 		IndexPage.clickLoginButton();
 	    
@@ -138,6 +132,28 @@ public class UserSteps{
 		assertTrue(At.page(HomePage.URL));
 		assertTrue(HomePage.checkIfLoggedInAtGui(username));
 		
+	}
+	
+	
+	@Given("^I'm at the Sign Up Page$")
+	public void i_m_at_the_Sign_Up_Page() throws Throwable {
+		Go.to(SignUpPage.URL);
+		At.page(SignUpPage.URL);
+	}
+
+	@When("^I fill the Sign Up form with username \"(.*?)\", password \"(.*?)\" and password confirmation \"(.*?)\"$")
+	public void i_fill_the_Sign_Up_form_with_username_password_and_password_confirmation(String username, String pass1, String pass2) throws Throwable {
+		SignUpPage.fillSignUpForm(username, pass1, pass2);
+	}
+	
+	@When("^I click the Create account button$")
+	public void i_click_the_Create_account_button() throws Throwable {
+	    SignUpPage.clickCreateAccountButton();
+	}
+	
+	@Then("^a message indicating the user was successfully registered is displayed$")
+	public void a_message_indicating_the_user_was_successfully_registered_is_displayed() throws Throwable {
+		assertTrue(SignUpPage.checkSuccessfullyCreatedMsg());
 	}
 		
 
