@@ -40,4 +40,18 @@ public class UserDAOImpl extends GenericDAOImp<User, Long> implements UserDAO, S
 		}
 		return (User) l.get(0);
 	}
+
+	@Override
+	public User getByEmail(String userEmail) {
+		String query = "FROM User u where u.email = :email";
+		Query q = getEntityManager().createQuery(query);
+		q.setParameter("email", userEmail);
+
+		List l = q.getResultList();
+
+		if (l == null || l.isEmpty() || l.size() > 1) {
+			return null;
+		}
+		return (User) l.get(0);
+	}
 }

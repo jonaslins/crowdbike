@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.software.project.dao.PasswordResetTokenDAO;
 import com.software.project.dao.RoleDAO;
 import com.software.project.dao.UserDAO;
 import com.software.project.dao.VerificationTokenDAO;
+import com.software.project.entities.PasswordResetToken;
 import com.software.project.entities.Role;
 import com.software.project.entities.User;
 import com.software.project.entities.VerificationToken;
@@ -28,6 +30,9 @@ public class UserServiceImp implements UserService{
 	
 	@Resource
 	private VerificationTokenDAO verificationTokenDAO;
+	
+	@Resource
+	private PasswordResetTokenDAO passwordResetTokenDAO;
 	
 	@Override
 	public List<User> getAll() {
@@ -75,6 +80,24 @@ public class UserServiceImp implements UserService{
 		VerificationToken verificationToken = new VerificationToken(token, user);
 		return verificationTokenDAO.createNew(verificationToken);
 		
+	}
+
+	@Override
+	public PasswordResetToken getPasswordResetToken(String token) throws Exception {
+		// TODO Auto-generated method stub
+		return passwordResetTokenDAO.getByToken(token);
+	}
+
+	@Override
+	public PasswordResetToken createPasswordResetToken(User user, String token) throws Exception {
+		PasswordResetToken  passwordResetToken = new PasswordResetToken(token, user);
+		return passwordResetTokenDAO.createNew(passwordResetToken);
+	}
+
+	@Override
+	public User getUserByEmail(String userEmail) {
+		// TODO Auto-generated method stub
+		return dao.getByEmail(userEmail);
 	}
 
 }

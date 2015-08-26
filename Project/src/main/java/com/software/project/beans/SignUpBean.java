@@ -1,5 +1,6 @@
 package com.software.project.beans;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.software.project.entities.User;
+import com.software.project.entities.VerificationToken;
 import com.software.project.service.UserService;
 import com.software.project.util.mail.OnRegistrationCompleteEvent;
 
@@ -37,18 +39,38 @@ public class SignUpBean {
 			//TODO Send message error
 		}else{
 			
-			FacesContext.getCurrentInstance().addMessage(null,
-	                new FacesMessage("Welcome " + username));
 			try {
 				String appUrl = "http://localhost:8080";
 				eventPublisher.publishEvent(new OnRegistrationCompleteEvent
 						(newUser, Locale.forLanguageTag("pt_BR"), appUrl));
+				
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Welcome " + username));
+				
 				reset();
 			} catch (Exception me) {
 				//TODO send email error
 			}
 		}
 		
+	}
+	
+	
+	public String confirmRegistration(String token) throws Exception {
+//		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+	    VerificationToken verificationToken = userService.getVerificationToken(token);
+	    if (verificationToken == null) {
+//	        TODO VERIFICATION EXPIRED
+	    }
+	     
+	    User user = verificationToken.getUser();
+	    Calendar cal = Calendar.getInstance();
+	    if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+//	         TODO VERIFICATION EXPIRED
+	    } 
+
+	    userService.saveEnabledUser(user); 
+	    return "homePage"; 
 	}
 	
 	public void reset() {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+	
+	<ui:define name="header">
+		<ui:include src="/util/header.xhtml" />
+		
+	</ui:define>
+	
+	
+	<ui:define name="content">
+		<f:event listener="#{signUpBean.confirmRegistration(param['token'])}" type="preRenderView" />
+	
+		<h:outputText value="Resgistrado"></h:outputText>
+		<h:outputText value=" #{param['token']}" />
+	</ui:define>
+	
+	<ui:define name="footer">
+		<ui:include src="/util/footer.xhtml" />
+	</ui:define>
+	
+</ui:composition>

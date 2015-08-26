@@ -6,12 +6,12 @@ import org.springframework.context.ApplicationEvent;
 
 import com.software.project.entities.User;
 
-public class OnRegistrationCompleteEvent extends ApplicationEvent {
+public class OnPasswordResetEmailSent extends ApplicationEvent {
     private final String appUrl;
     private final Locale locale;
     private final User user;
  
-    public OnRegistrationCompleteEvent(User user, Locale locale, String appUrl) {
+    public OnPasswordResetEmailSent(User user, Locale locale, String appUrl) {
         super(user);
          
         this.user = user;

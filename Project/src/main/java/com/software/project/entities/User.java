@@ -41,6 +41,9 @@ public class User implements UserDetails{
 	@Column(name = "user_password")
 	private String password;
 	
+	@Column(name = "user_email", unique = true)
+	private String email;
+	
 	@Column(name = "enabled")
     private boolean enabled;
 	
@@ -52,11 +55,22 @@ public class User implements UserDetails{
 	@OneToMany(fetch = FetchType.LAZY , orphanRemoval=true, cascade=CascadeType.ALL , mappedBy = "user")
 	private Set<Ocorrencia> ocorrencias = new HashSet<Ocorrencia>();
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private VerificationToken verificationToken;
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private PasswordResetToken passwordResetToken;
 	     
 	public User() {
 		super();
+		this.enabled = false;
+	}
+	
+	public User(String username, String password, String email){
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
 		this.enabled = false;
 	}
 	
@@ -147,6 +161,30 @@ public class User implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		// TODO Auto-generated method stub
 		this.enabled = enabled;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public VerificationToken getVerificationToken() {
+		return verificationToken;
+	}
+
+	public void setVerificationToken(VerificationToken verificationToken) {
+		this.verificationToken = verificationToken;
+	}
+
+	public PasswordResetToken getPasswordResetToken() {
+		return passwordResetToken;
+	}
+
+	public void setPasswordResetToken(PasswordResetToken passwordResetToken) {
+		this.passwordResetToken = passwordResetToken;
 	}	
    
 }

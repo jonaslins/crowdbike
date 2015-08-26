@@ -33,18 +33,19 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     }
  
     private void confirmRegistration(OnRegistrationCompleteEvent event) throws Exception {
-        User user = event.getUser();
-        String token = UUID.randomUUID().toString();
-        service.createVerificationToken(user, token);
-         
-        String recipientAddress = "foo@bar.com";
-        String subject = "Registration Confirmation";
-        String confirmationUrl = event.getAppUrl() + "/project/pages/register/registrationConfirm.jsf?token=" + token;
-        String message = "";//messages.getMessage("message.regSucc", null, event.getLocale());
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(recipientAddress);
-        email.setSubject(subject);
-        email.setText(message + "" + "Confirmation link: " + confirmationUrl);
-        mailSender.send(email);
-    }
+  	  User user = event.getUser();
+      String token = UUID.randomUUID().toString();
+      service.createVerificationToken(user, token);
+       
+      String recipientAddress = user.getEmail();
+      String subject = "Registration Confirmation";
+      String confirmationUrl = event.getAppUrl() + "/project/pages/user/register/registrationConfirm.jsf?token=" + token;
+      String message = "";//messages.getMessage("message.regSucc", null, event.getLocale());
+      SimpleMailMessage email = new SimpleMailMessage();
+      email.setTo(recipientAddress);
+      email.setSubject(subject);
+      email.setText(message + "Welcome " + user.getUsername() + "\n"
+      		+ " Confirm you account by clicking the link below:\n" + confirmationUrl);
+      mailSender.send(email);
+  }
 }

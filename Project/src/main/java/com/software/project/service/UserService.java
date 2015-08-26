@@ -2,6 +2,7 @@ package com.software.project.service;
 
 import java.util.List;
 
+import com.software.project.entities.PasswordResetToken;
 import com.software.project.entities.User;
 import com.software.project.entities.VerificationToken;
 
@@ -22,5 +23,11 @@ public interface UserService {
 	public VerificationToken createVerificationToken(User user, String token) throws Exception;
 
 	public User saveEnabledUser(User user) throws Exception;
+
+	public PasswordResetToken getPasswordResetToken(String token)throws Exception;
+	
+	public PasswordResetToken createPasswordResetToken(User user, String token)throws Exception;
+
+	public User getUserByEmail(String userEmail);
 
 }

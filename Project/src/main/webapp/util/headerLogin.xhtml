@@ -20,11 +20,11 @@
 					<b:navLink value="STAY TUNED" href="#"></b:navLink>
 				</b:navbarLinks>
 				<b:navbarLinks pull="right">
-						<h:outputLink id="loginLink" value="javascript:void(0)"
-							onclick="PF('dlg').show()" title="login" >
-							<h:outputText value="Login" role="menuitem"></h:outputText>
+					<h:outputLink id="loginLink" value="javascript:void(0)"
+						onclick="PF('dlg').show()" title="login">
+						<h:outputText value="Login" role="menuitem"></h:outputText>
 
-						</h:outputLink>
+					</h:outputLink>
 				</b:navbarLinks>
 				<b:navbarLinks pull="right">
 					<b:navLink value="Sign Up" href="/pages/signup/"></b:navLink>
@@ -48,6 +48,11 @@
 							action="#{authenticator.login}"
 							oncomplete="handleLoginRequest(xhr, status, args)" />
 					</f:facet>
+					<h:outputLink value="pages/user/resetPassword/resetPassword.jsf" disabled="false" >
+						<h:outputText value="Forgot your password?" ></h:outputText>
+
+					</h:outputLink>
+
 				</h:panelGrid>
 
 			</p:dialog>
