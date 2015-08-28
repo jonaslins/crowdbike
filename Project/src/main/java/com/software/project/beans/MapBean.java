@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.map.DefaultMapModel;
@@ -32,7 +33,6 @@ public class MapBean implements Serializable {
     private List<Ocorrencia> ocorrencias;
     private String qtdOcorrencias;
     private PieChartModel pieModel;  
-    
    /* @Autowired
     OcorrenciaBO ocorrenciaBO;*/
     @Autowired
@@ -59,7 +59,14 @@ public class MapBean implements Serializable {
  
     }
     
-    
+    public void updateMap(){
+    	
+    	//TODO update markers properly
+    	 for (int i = 0; i < advancedModel.getMarkers().size(); i++){
+    		 Marker tmp = advancedModel.getMarkers().get(i);
+    		 RequestContext.getCurrentInstance().addCallbackParam("marker" + i, tmp);             
+    	 }
+    }
 	private void createPieModel() throws Exception {  
         pieModel = new PieChartModel();  
   
@@ -80,7 +87,7 @@ public class MapBean implements Serializable {
     public MapModel getAdvancedModel() {  
         return advancedModel;  
     }  
-      
+    private int i = 0;
     public void onMarkerSelect(OverlaySelectEvent event) throws NumberFormatException, ParseException {  
         marker = (Marker) event.getOverlay();  
         ocorrenciaSelected = persistenceEntity.findById(Long.parseLong(marker.getTitle()));

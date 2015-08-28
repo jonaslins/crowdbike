@@ -28,6 +28,7 @@ public class UserBean {
 	
 	private String username;
 	private String password;
+	private String email;
 	
 	private String newPassword;
 	private String currentPassword;
@@ -47,9 +48,22 @@ public class UserBean {
 	@Autowired
 	HttpServletRequest request;
 	
-	public void updateUser(User user) throws Exception{
+	public void createUser() throws Exception{
+		User user = new User(username, password, email);
+		User newUser = userService.createUser(user);
+		if(newUser!=null){
+			userService.saveEnabledUser(newUser);
+			addMessage("Usuário adicionado", "Operação realizada com sucesso", FacesMessage.SEVERITY_INFO);
+		}else{
+			//TODO show proper message
+		}
+
+	}
+	
+	public void updateUser(User user) throws Exception{		
 		user.setUsername(username);
 		user.setPassword(password);
+		user.setEmail(email);
 		userService.updateUser(user);
 	}
 	
@@ -146,6 +160,14 @@ public class UserBean {
 
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

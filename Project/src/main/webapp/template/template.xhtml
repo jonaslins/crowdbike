@@ -4,47 +4,36 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui">
 
 <f:view contentType="text/html">
 	<ui:insert name="metadata" />
 
 	<h:head>
 		<title>Bike Crash - <ui:insert name="pageTitle"></ui:insert></title>
-		<link rel="stylesheet"  href="#{facesContext.externalContext.requestContextPath}/css/css.css" />
+		<link rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/css.css" />
 	</h:head>
-	
+
 	<h:body>
-	
-			<div id="header">
-				<ui:insert name="header" />
-			</div>
-			<div id="mainMenu"> 
-				<ui:insert name="mainMenu" />
-				
-			</div>
-			
-			<div id="main">
-				
-				
-				<b:row styleClass="show-grid">
-				    <b:column span="8" offset="2">
-				    
-				    <div class="content" id="content">
-						<ui:insert name="content" />
-					</div>
-					
-				</b:column>
-				</b:row>	
-			
-			</div>
-			
-			
-			<div id="footer">
-                   <ui:insert name="footer" />
-			</div>
+
+		<div id="header">
+			<ui:insert name="header" />
+		</div>
+		<div id="mainMenu">
+			<ui:insert name="mainMenu" />
+
+		</div>
+
+		<div id="main">
+			<ui:insert name="content" />
+		</div>
+
+
+		<div id="footer">
+			<ui:insert name="footer" />
+		</div>
 	</h:body>
-	
+
 </f:view>
 </html>

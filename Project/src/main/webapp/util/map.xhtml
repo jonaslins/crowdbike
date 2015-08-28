@@ -4,17 +4,29 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui">
+<script>
+//<![CDATA[
+function handleComplete(xhr, status, args){
+   var gmap = mapVar.getMap();
+   for(var i in gmap.markers)
+   {
+      var newMarker = eval("args.marker"+i);
+      var oldMarker = gmap.markers[i];
+      oldMarker.title = newMarker.title;
+      oldMarker.setMap(gmap);
+   }   
+}
+// ]]>
+</script>
+	<div id="map" style="width:100%; padding: 0px; margin: 0px;">
 
-
-	<div id="map">
-
-		<p:tabView id="tabView">
+		<p:tabView id="tabView" style="width:100%; padding: 0px; margin: 0px;">
 
 
 			<p:tab id="tab1" title="Mapa">
-				<p:gmap center="-8.054277,-34.881256" widgetVar="mapVar" zoom="13"
-					type="ROADMAP" model="#{mapBean.advancedModel}" streetView="false"
+				<p:gmap id="map" widgetVar="mapVar" zoom="13"
+					type="ROADMAP" model="#{mapBean.advancedModel}" streetView="false" 
 					style="width:100%;height:450px">
 
 

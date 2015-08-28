@@ -4,58 +4,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sec="http://www.springframework.org/security/tags">
 
 
 	<div id="topo">
-		<h:form id="form">
-			<b:navBar
-				brandImg="#{facesContext.externalContext.requestContextPath}/images/logo.png"
-				brandHref="#{facesContext.externalContext.requestContextPath}"
-				fixed="top">
-				<b:navbarLinks>
-					<b:navLink value="MAP" href="#"></b:navLink>
-					<b:navLink value="ABOUT" href="#"></b:navLink>
-					<b:navLink value="STAY TUNED" href="#"></b:navLink>
-				</b:navbarLinks>
-				<b:navbarLinks pull="right">
-					<h:outputLink id="loginLink" value="javascript:void(0)"
-						onclick="PF('dlg').show()" title="login">
-						<h:outputText value="Login" role="menuitem"></h:outputText>
-
-					</h:outputLink>
-				</b:navbarLinks>
-				<b:navbarLinks pull="right">
-					<b:navLink value="Sign Up" href="/pages/signup/"></b:navLink>
-				</b:navbarLinks>
-			</b:navBar>
-
-			<p:dialog id="dialog" header="Login" widgetVar="dlg"
-				resizable="false">
-
-				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel for="username" value="Username:" />
-					<p:inputText value="#{authenticator.username}" id="username"
-						required="true" label="username" />
-
-					<h:outputLabel for="password" value="Password:" />
-					<h:inputSecret value="#{authenticator.password}" id="password"
-						required="true" label="password" />
-
-					<f:facet name="footer">
-						<p:commandButton id="loginButton" value="Login"
-							action="#{authenticator.login}"
-							oncomplete="handleLoginRequest(xhr, status, args)" />
-					</f:facet>
-					<h:outputLink value="pages/user/resetPassword/resetPassword.jsf" disabled="false" >
-						<h:outputText value="Forgot your password?" ></h:outputText>
-
-					</h:outputLink>
-
-				</h:panelGrid>
-
-			</p:dialog>
-		</h:form>
+		<img alt="" src="#{facesContext.externalContext.requestContextPath}/images/logo.png" />
 	</div>
 </ui:composition>

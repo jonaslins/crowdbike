@@ -17,8 +17,6 @@
 	</ui:define>
 	
 	<ui:define name="content">
-	<h:form id="form">           
-	    <p:growl id="message" showDetail="true" />
  	    <p:accordionPanel multiple="true">
  	    
  	     	<p:tab title="Admin Info">
@@ -27,7 +25,8 @@
 	        </p:tab>
 	        
 	        <p:tab title="User Management">
-	            <h:panelGrid>
+	        <h:form id="form">  
+	            <h:panelGrid id="panel">
 	                <p:dataTable id="singleDT" var="user" value="#{userbean.users}" selectionMode="single" selection="#{userbean.selectedUser}" rowKey="#{user.id}"
 	                	paginator="true" rows="10">
 				        <p:column headerText="Id">
@@ -36,11 +35,14 @@
 				        <p:column headerText="Username">
 				            <h:outputText value="#{user.username}" />
 				        </p:column>
+				        <p:column headerText="Email">
+				            <h:outputText value="#{user.email}" />
+				        </p:column>
 				        <f:facet name="footer">
 				        	<p:growl id="message" showDetail="true" />
 				            <p:commandButton icon="ui-icon-plus" value="New user" onclick="PF('dlg').show();"/>
 				            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />				         
-				            <p:commandButton value="Remove" icon="ui-icon-close" actionListener="#{userbean.deleteUser(userbean.selectedUser)}" update="message">
+				            <p:commandButton value="Remove" icon="ui-icon-close" actionListener="#{userbean.deleteUser(userbean.selectedUser)}" update="message @([id$=form])">
 						        
 						        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
 						    </p:commandButton>	
@@ -48,34 +50,38 @@
 				    </p:dataTable>
 			    	
 	            </h:panelGrid>
-	            
+	            </h:form>
 	        </p:tab>
-	         
 	    </p:accordionPanel>
 	    
 	    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 	        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
     	</p:confirmDialog>
+    	<h:form id="addForm">           
+		    		<p:growl id="message" showDetail="true" />
+		    
+	    	<p:dialog header="Adicionar usuário" widgetVar="dlg" resizable="false">		   
+		        <h:panelGrid columns="2" cellpadding="5">  
+		            <h:outputLabel for="username" value="Username:" />  
+		            <p:inputText value="#{userbean.username}" id="username" required="true" label="username"/>  
+		              
+		            <h:outputLabel for="password" value="Password:" />  
+		            <h:inputSecret value="#{userbean.password}"  id="password" required="true" label="password" />
+		            
+		            <h:outputLabel for="email" value="Email:" />  
+		            <h:inputSecret value="#{userbean.email}"  id="email" required="true" label="email" />   
+		              
+		            <f:facet name="footer">  
+		                <p:commandButton id="addBtn" value="Adicionar"    
+		                    actionListener="#{userbean.createUser}" update="message @([id$=form])" oncomplete="PF('dlg').hide();"/>  
+		            </f:facet>  
+		        </h:panelGrid>  
+		          
+			</p:dialog>
+	    </h:form>
     	
-    	<p:dialog header="Adicionar usuário" widgetVar="dlg" resizable="false">		   
-	        <h:panelGrid columns="2" cellpadding="5">  
-	            <h:outputLabel for="username" value="Username:" />  
-	            <p:inputText value="#{userbean.username}" id="username" required="true" label="username"/>  
-	              
-	            <h:outputLabel for="password" value="Password:" />  
-	            <h:inputSecret value="#{userbean.password}"  id="password" required="true" label="password" />  
-	              
-	            <f:facet name="footer">  
-	                <p:commandButton id="addBtn" value="Adicionar"    
-	                    action="#{userbean.createUser}" oncomplete="PF('dlg').hide();"/>  
-	            </f:facet>  
-	        </h:panelGrid>  
-	          
-		</p:dialog>
     	
-    	
-    </h:form>
 	</ui:define>
 	
 	<ui:define name="footer">
