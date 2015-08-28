@@ -74,12 +74,6 @@ public class User implements UserDetails{
 		this.enabled = false;
 	}
 	
-	public User(String username, String password){
-		super();
-		this.username = username;
-		this.password = password;
-		this.enabled = false;
-	}
 	
 	public Long getId() {
 		return id;

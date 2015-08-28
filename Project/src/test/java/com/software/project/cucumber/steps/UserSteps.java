@@ -82,10 +82,10 @@ public class UserSteps{
 		
 	}
 
-	@When("^I create a user with username \"([^\"]*)\" and password \"([^\"]*)\"$")
-	public void I_create_a_user_with_username_and_password(String username, String password) throws Throwable {
+	@When("^I create a user with username \"(.*?)\", password \"(.*?)\" and e-mail \"(.*?)\"$")
+	public void i_create_a_user_with_username_password_and_e_mail(String username, String password, String email) throws Throwable {
 		
-		User user = new User(username, password);
+		User user = new User(username, password, email);
 		userAux = userService.createUser(user);    
 	    
 	}
@@ -141,9 +141,9 @@ public class UserSteps{
 		At.page(SignUpPage.URL);
 	}
 
-	@When("^I fill the Sign Up form with username \"(.*?)\", password \"(.*?)\" and password confirmation \"(.*?)\"$")
-	public void i_fill_the_Sign_Up_form_with_username_password_and_password_confirmation(String username, String pass1, String pass2) throws Throwable {
-		SignUpPage.fillSignUpForm(username, pass1, pass2);
+	@When("^I fill the Sign Up form with username \"(.*?)\", password \"(.*?)\", password confirmation \"(.*?)\" and email \"(.*?)\"$")
+	public void i_fill_the_Sign_Up_form_with_username_password_password_confirmation_and_email(String username, String pass1, String pass2, String email) throws Throwable {
+	  	SignUpPage.fillSignUpForm(username, pass1, pass2, email);
 	}
 	
 	@When("^I click the Create account button$")
@@ -154,6 +154,24 @@ public class UserSteps{
 	@Then("^a message indicating the user was successfully registered is displayed$")
 	public void a_message_indicating_the_user_was_successfully_registered_is_displayed() throws Throwable {
 		assertTrue(SignUpPage.checkSuccessfullyCreatedMsg());
+	}
+	
+	@Then("^a message indicating the username already exists is displayed$")
+	public void a_message_indicating_the_username_already_exists_is_displayed() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		assertTrue(SignUpPage.checkUsernameExistsMsg());
+	}
+
+	@Then("^a message indicating the passwords don't match is displayed$")
+	public void a_message_indicating_the_passwords_don_t_match_is_displayed() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		assertTrue(SignUpPage.checkNonMatchingPasswordsMsg());
+	}
+	
+	@Then("^a message indicating the email is not valid$")
+	public void a_message_indicating_the_email_is_not_valid() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		assertTrue(SignUpPage.checkInvalidEmailMsg());
 	}
 		
 

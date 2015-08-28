@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
@@ -24,6 +25,7 @@ public class SignUpBean {
 	private String username;
 	private String password;
 	private String confirmPassword;
+	private String email;
 	
 	@Autowired
 	ApplicationEventPublisher eventPublisher;
@@ -32,8 +34,14 @@ public class SignUpBean {
 	private UserService userService;
 	
 	public void createAccount() throws Exception{
-		User user = new User(username, password);
+		User user = new User(username, password, email);
 		
+		boolean usernameExists = userService.getUserByUsername(username)!=null;
+		if(usernameExists){
+			addMessage("Username already exists", "Please try another", FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+			
 		User newUser = userService.createUser(user);
 		if(newUser==null){
 			//TODO Send message error
@@ -73,6 +81,11 @@ public class SignUpBean {
 	    return "homePage"; 
 	}
 	
+	public void addMessage(String summary, String detail, Severity severity) {
+        FacesMessage message = new FacesMessage(severity, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+	
 	public void reset() {
         RequestContext.getCurrentInstance().reset("form:signUpGrid");
     }
@@ -93,6 +106,16 @@ public class SignUpBean {
 	}
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

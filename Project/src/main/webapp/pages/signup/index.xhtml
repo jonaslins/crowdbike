@@ -20,23 +20,39 @@
 	<ui:define name="content">
 		<h:form id="form">
 			<p:messages id="messages" showDetail="true" />
-			<h:panelGrid id="signUpGrid" columns="2" cellpadding="5">
+			<h:panelGrid id="signUpGrid" columns="3" cellpadding="5">
 				<h:outputLabel for="username" value="Username: *" />
 				<p:inputText value="#{signUpBean.username}" id="username"
-					required="true" label="username" placeholder="Username" />
+					required="true" label="Username" placeholder="Username">
+					
+				</p:inputText>
+				<h:message id="usernameMsg" for="username" style="color: red;" />
 
 				<h:outputLabel for="password" value="Password: *" />
 				<p:password value="#{signUpBean.password}" id="password"
-					required="true" label="newPassword" placeholder="Password" />
+					match="confirmPassword" required="true" label="Password"
+					requiredMessage="Please enter a password" placeholder="Password" />
+				<h:message id="passMsg" for="password" style="color: red;" />
 
 				<h:outputLabel for="confirmPassword" value="Confirm password: *" />
 				<p:password value="#{signUpBean.confirmPassword}"
-					id="confirmPassword" required="true" label="confirmPassword"
-					placeholder="Confirm password" />
+					id="confirmPassword" required="true" requiredMessage=""
+					label="Confirm password" placeholder="Confirm password" />
+				<h:message id="confirmPassMsg" for="confirmPassword"
+					style="color: red;" />
+
+				<h:outputLabel for="email" value="E-mail: *" />
+				<p:inputText value="#{signUpBean.email}" id="email" required="true" validatorMessage="Invalid e-mail"
+					label="E-mail" placeholder="E-mail">
+					<f:validateRegex 
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<h:message id="emailMsg" for="email" style="color: red;" />
+
 
 				<f:facet name="footer">
 					<p:commandButton id="createAccountBtn" value="Create account"
-						update="messages signUpGrid" actionListener="#{signUpBean.createAccount}" />
+						update="signUpGrid messages" actionListener="#{signUpBean.createAccount}" />
 				</f:facet>
 			</h:panelGrid>
 
