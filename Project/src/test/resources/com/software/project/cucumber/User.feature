@@ -35,8 +35,25 @@ Feature: User
 		
 	Scenario: create user with invalid email
 		Given I'm at the Sign Up Page
-		When I fill the Sign Up form with username "foo", password "bar", password confirmation "bar" and email "foo@bar"
+		When I fill the Sign Up form with username "foo", password "bar", password confirmation "bar" and email "foo@bar-txn"
 		And I click the Create account button
 		Then a message indicating the email is not valid
 		
-			
+	Scenario: reset request password
+		Given I have an account with username "foo" and email "foo@bar.txn"
+		When I request to reset my password
+		Then a reset token permission is created
+		
+	Scenario: reset request password web
+		Given I'm at the Reset Password Page
+		When I fill the email field with "foo@bar.txn"
+		And I click to send email
+		Then a message indicating the email was sent is displayed.
+		
+	Scenario: reset request password web with wrong email
+		Given I'm at the Reset Password Page
+		When I fill the email field with the inexistent email "bar@foo.txn"
+		And I click to send email
+		Then a message indicating the email was not found in the system is displayed
+		
+		

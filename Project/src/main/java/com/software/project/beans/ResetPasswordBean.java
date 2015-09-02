@@ -45,14 +45,14 @@ public class ResetPasswordBean {
 				eventPublisher.publishEvent(
 						new OnPasswordResetEmailSent(user, Locale.forLanguageTag("pt_BR"), appUrl));
 				
-				addMessage(null, "Check your email inbox", FacesMessage.SEVERITY_INFO);
+				addMessage("Check your email inbox", null, FacesMessage.SEVERITY_INFO);
 				reset();
 			} catch (Exception me) {
 				//TODO send email error
 			}
 			
 		} else {
-			addMessage(null, "User e-mail not found", FacesMessage.SEVERITY_ERROR);
+			addMessage("User e-mail not found", null, FacesMessage.SEVERITY_ERROR);
 		}
 	}
 

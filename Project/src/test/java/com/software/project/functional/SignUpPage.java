@@ -51,10 +51,6 @@ public class SignUpPage extends WebPage {
 		createAccountBtn.click();
 	}
 	
-	private static boolean messageContains(String elementId, String message){
-		WebElement messagesEl = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id(elementId)));
-		return messagesEl.getText().contains(message);
-	}
 	
 	
 	public static boolean checkSuccessfullyCreatedMsg() {

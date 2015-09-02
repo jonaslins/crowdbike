@@ -38,7 +38,7 @@ public class SignUpBean {
 		
 		boolean usernameExists = userService.getUserByUsername(username)!=null;
 		if(usernameExists){
-			addMessage("Username already exists", "Please try another", FacesMessage.SEVERITY_ERROR);
+			addMessage("Username already exists", null, FacesMessage.SEVERITY_ERROR);
 			return;
 		}
 			
