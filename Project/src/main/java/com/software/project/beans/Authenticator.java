@@ -28,6 +28,7 @@ public class Authenticator implements AuthenticationProvider {
 	private String password;
 
 	public String login() {
+		System.out.println("#987");
 		try {
 			User user = service.login(username, password);
 			if(user.isEnabled()){
