@@ -1,6 +1,11 @@
 package com.software.project.beans;
 
+import java.io.IOException;
+import java.util.ResourceBundle;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +32,8 @@ public class Authenticator implements AuthenticationProvider {
 	private String username;
 	private String password;
 
-	public String login() {
-		System.out.println("#987");
+
+	public void login() {
 		try {
 			User user = service.login(username, password);
 			if(user.isEnabled()){
@@ -38,13 +43,22 @@ public class Authenticator implements AuthenticationProvider {
 			}
 			loginSpringSecurity(user);
 			session.setUser(user);
-			return "homePage";
+		    FacesContext.getCurrentInstance().getExternalContext().redirect("pages/home.jsf");
+		    return;
 		} catch (IllegalArgumentException ex) {
-			message(ex.getMessage());
+			
+			String msg = getMessage("user.authentication.login.error");
+			addMessage(msg, null, FacesMessage.SEVERITY_ERROR);
+			
+		} catch (IOException e) {
 		}
-		return "";
 	}
 
+	private String getMessage(String messageId){		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(context, "message");
+		return bundle.getString(messageId);
+	}
 	private void loginSpringSecurity(User user) {
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
 				user.getUsername(), null, user.getRoles());
@@ -60,10 +74,10 @@ public class Authenticator implements AuthenticationProvider {
 		return "index";
 	}
 
-	private void message(String message) {
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(message));
-	}
+	public void addMessage(String summary, String detail, Severity severity) {
+        FacesMessage message = new FacesMessage(severity, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 
 	public String getUsername() {
 		return username;

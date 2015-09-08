@@ -10,7 +10,6 @@ Feature: User
 	    
 	Scenario: user login web
 	    Given I am at the Index page
-	    When I click on login link
 	    And I properly fill the fields with username "admin" and password "admin"
 	    And I click the login button
 	    Then I'm logged in at the Home page with my "admin" username account

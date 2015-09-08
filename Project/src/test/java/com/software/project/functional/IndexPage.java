@@ -14,11 +14,8 @@ public class IndexPage extends WebPage {
 	public IndexPage(WebDriver driver) {
 		super(driver);
 	}
-
-	@FindBy(id="form:loginLink")
-	private static WebElement loginLink;
 	
-	@FindBy(id="form:loginButton")
+	@FindBy(id="form:login")
 	private static WebElement loginButton;
 	
 	@FindBy(id="form:username")
@@ -31,10 +28,6 @@ public class IndexPage extends WebPage {
 		loginButton.click();
 	}
 	
-	public static void clickLoginLink() {
-		(new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(loginLink));
-		loginLink.click();
-	}
 	
 	public static void fillLoginForm(String username, String password){
 		usernameField.sendKeys(username);

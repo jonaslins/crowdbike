@@ -109,13 +109,6 @@ public class UserSteps {
 
 	}
 
-	@When("^I click on login link$")
-	public void I_click_on_login_link() throws Throwable {
-
-		IndexPage.clickLoginLink();
-
-	}
-
 	@When("^I properly fill the fields with username \"([^\"]*)\" and password \"([^\"]*)\"$")
 	public void I_properly_fill_the_fields_with_username_and_password(String username, String password)
 			throws Throwable {
