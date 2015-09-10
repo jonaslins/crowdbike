@@ -65,7 +65,7 @@ p {
 }
 
 section {
-    padding: 100px 0;
+    padding: 150px 0;
 }
 
 aside {
@@ -183,7 +183,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: url(../images/header.jpg);
+    background-image: url(images/header.jpg);
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
