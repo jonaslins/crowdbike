@@ -7,9 +7,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/landpage_template.xhtml">
 
+	<ui:define name="pageTitle">#{message['page.map.title']}</ui:define>
+
 	<ui:define name="menu-links">
-		<li class="page-scroll"><a
-			href="#{facesContext.externalContext.requestContextPath}/map.jsf">#{message['navbar.menu.map.label']}</a></li>
+		<li class="page-scroll active"><a href="map.jsf">#{message['navbar.menu.map.label']}</a></li>
 		<li class="page-scroll"><a href="index.jsf#about">#{message['navbar.menu.about.label']}</a></li>
 		<li class="page-scroll"><a href="index.jsf#login">#{message['navbar.menu.login.label']}</a></li>
 	</ui:define>
@@ -19,7 +20,45 @@
 
 	<ui:define name="main-content">
 
-		<h:form style="margin-top:100px" id="mapForm">
+		<section
+			style="margin-top: 100px; padding: 70px 0; background-color: #6CB;"
+			class="bg-primary" id="legend">
+			<div class="container">
+				<div class="row vertical-align">
+					<div class="col-lg-5 text-right">
+						<div class="text-right" style="margin: 5px auto;">
+							<span class="text-faded">#{message['map.legend.accident-risk.label']}</span>
+							<i class="fa fa-ambulance fa-2x"></i>
+						</div>
+						<div style="margin: 5px auto;">
+							<span class="text-faded">#{message['map.legend.dangerous-road.label']}</span>
+							<i class="fa fa-road fa-2x"></i>
+						</div>
+						<div style="margin: 5px auto;">
+							<span class="text-faded">#{message['map.legend.bad-sinalization.label']}</span>
+							<i class="fa fa-map-signs fa-2x"></i>
+						</div>
+					</div>
+					<div class="col-lg-2 text-center">
+						<i class="fa fa-info-circle fa-5x"></i>
+						<h2 class="section-heading">#{message['map.legend.title']}</h2>
+					</div>
+					<div class="col-lg-5">
+						<div style="margin: 5px auto;">
+							<i class="fa fa-map-signs fa-2x"></i> <span class="text-faded">#{message['map.legend.semaphore.label']}</span>
+						</div>
+						<div style="margin: 5px auto;">
+							<i class="fa fa-dot-circle-o fa-2x"></i> <span class="text-faded">#{message['map.legend.pothole.label']}</span>
+						</div>
+						<div style="margin: 5px auto;">
+							<i class="fa fa-user-times fa-2x"></i> <span class="text-faded">#{message['map.legend.imprudence.label']}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<h:form id="mapForm">
 			<p:gmap center="-8.054277,-34.881256" widgetVar="mapVar" zoom="13"
 				id="gmap" type="ROADMAP" model="#{mapBean.advancedModel}"
 				streetView="false" style="width:100%;height:100vh;">

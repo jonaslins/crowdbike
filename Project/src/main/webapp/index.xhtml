@@ -7,6 +7,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/landpage_template.xhtml">
 	
+	<ui:define name="pageTitle">#{message['page.home.title']}</ui:define>
+	
 	<ui:define name="menu-links">
 		<li class="page-scroll"><a href="map.jsf">#{message['navbar.menu.map.label']}</a></li>
 		<li class="page-scroll"><a href="#about">#{message['navbar.menu.about.label']}</a></li>
