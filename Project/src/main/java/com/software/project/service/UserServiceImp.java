@@ -93,6 +93,11 @@ public class UserServiceImp implements UserService{
 		PasswordResetToken  passwordResetToken = new PasswordResetToken(token, user);
 		return passwordResetTokenDAO.createNew(passwordResetToken);
 	}
+	
+	@Override
+	public void removePasswordResetToken(PasswordResetToken passwordResetToken) throws Exception {
+ 		passwordResetTokenDAO.delete("id" ,passwordResetToken.getId());
+	}
 
 	@Override
 	public User getUserByEmail(String userEmail) {

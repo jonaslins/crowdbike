@@ -92,7 +92,11 @@
 							</div>
 							<div id="success"></div>
 							<h:messages style="color:red;margin:8px;" id="messages" />
-
+							<div class="text-right">
+							<h:outputLink value="pages/user/resetPassword/resetPassword.jsf">
+								<h:outputText value="#{message['user.remember-password.label']}"></h:outputText>
+							</h:outputLink>
+							</div>
 							<div class="row">
 								<div class="form-group col-xs-12">
 									<p:commandButton action="#{authenticator.login}" id="login"
@@ -100,6 +104,7 @@
 										value="#{message['user.login.button.label']}" />
 								</div>
 							</div>
+
 						</h:form>
 					</div>
 					<div class="col-lg-4 col-lg-offset-1 col-md-6 text-center">

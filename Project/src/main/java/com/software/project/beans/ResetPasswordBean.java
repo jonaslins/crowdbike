@@ -67,22 +67,23 @@ public class ResetPasswordBean {
 	public void updatePassword(String token) throws Exception {
 		// HttpServletRequest request = (HttpServletRequest)
 		// FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		PasswordResetToken passwordReset = userService.getPasswordResetToken(this.token);
-		if (passwordReset == null) {
+		PasswordResetToken passwordResetToken = userService.getPasswordResetToken(this.token);
+		if (passwordResetToken == null) {
 			addMessage(null, "Password recover request may have expired. Try another request", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
 		
 		Calendar cal = Calendar.getInstance();
-		if ((passwordReset.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+		if ((passwordResetToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
 			addMessage(null, "Password recover request have expired. Try another request", FacesMessage.SEVERITY_ERROR);
 			return;
 		}		
 		
 		if(newPassword.equals(newPasswordConfirmation)){
-			User user = passwordReset.getUser();
+			User user = passwordResetToken.getUser();
 			user.setPassword(newPassword);
 			userService.updateUser(user);
+			userService.removePasswordResetToken(passwordResetToken);
 			addMessage(null, "Passwords changed successfully!", FacesMessage.SEVERITY_INFO);
 		}else{
 			addMessage(null, "Passwords don't match", FacesMessage.SEVERITY_ERROR);

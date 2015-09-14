@@ -27,6 +27,8 @@ public interface UserService {
 	public PasswordResetToken getPasswordResetToken(String token)throws Exception;
 	
 	public PasswordResetToken createPasswordResetToken(User user, String token)throws Exception;
+	
+	public void removePasswordResetToken(PasswordResetToken passwordResetToken)throws Exception;
 
 	public User getUserByEmail(String userEmail);
 

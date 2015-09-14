@@ -31,7 +31,7 @@ public class MailConfig {
         mailSenderImpl.setPort(PORT);
         mailSenderImpl.setProtocol("smtp");
         mailSenderImpl.setUsername("crowdbike@gmail.com");
-        mailSenderImpl.setPassword("");
+        mailSenderImpl.setPassword("c#cr0wdb1k3");
         final Properties javaMailProps = new Properties();
         javaMailProps.put("mail.smtp.auth", true);
         javaMailProps.put("mail.smtp.starttls.enable", true);
