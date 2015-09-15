@@ -64,6 +64,20 @@ p {
     color: rgba(255,255,255,.7);
 }
 
+.track {
+    position: relative;
+}
+.track > i {
+    position: relative;
+    display: inline;
+    width: 3em;
+    height: 1em;
+    background-color: #f05f40;
+    left: 0em;
+    top: 0em;
+}
+
+
 section {
     padding: 100px 0;
 }
