@@ -16,6 +16,7 @@ public abstract class WebPage {
 	private static final String APP_NAME = "project";
 	private static final String SERVER_URL = "http://localhost:8080/";
 	public static final String BASE_APP_URL = SERVER_URL + APP_NAME + "/";
+	public static final int TIMEOUT_DEFAULT = 15;
 
 	public static WebDriver driver;
 
@@ -24,7 +25,7 @@ public abstract class WebPage {
 	}
 	
 	public static boolean messageContains(String elementId, String message){
-		return (new WebDriverWait(driver, 15)).until(ExpectedConditions.textToBePresentInElement(By.id(elementId), message));		
+		return (new WebDriverWait(driver, TIMEOUT_DEFAULT)).until(ExpectedConditions.textToBePresentInElement(By.id(elementId), message));		
 	}
 
 

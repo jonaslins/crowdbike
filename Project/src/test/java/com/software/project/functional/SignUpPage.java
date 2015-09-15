@@ -54,7 +54,7 @@ public class SignUpPage extends WebPage {
 	
 	
 	public static boolean checkSuccessfullyCreatedMsg() {
-		messages = (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(messages));
+		messages = (new WebDriverWait(driver, TIMEOUT_DEFAULT)).until(ExpectedConditions.visibilityOf(messages));
 		return messages.getText().contains("Welcome");
 	}
 

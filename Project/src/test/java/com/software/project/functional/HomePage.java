@@ -20,7 +20,7 @@ public class HomePage extends WebPage {
 	private static WebElement usernameLabel;
 	
 	public static boolean checkIfLoggedInAtGui(String username) {
-		boolean loggedInAtGui = (new WebDriverWait(driver, 5)).until(ExpectedConditions.textToBePresentInElement(usernameLabel, username));
+		boolean loggedInAtGui = (new WebDriverWait(driver, TIMEOUT_DEFAULT)).until(ExpectedConditions.textToBePresentInElement(usernameLabel, username));
 		return loggedInAtGui;
 	}
 	
