@@ -91,6 +91,23 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   <welcome-file-list>
     <welcome-file>index.jsf</welcome-file>
   </welcome-file-list>
+  
+  
+  <servlet>
+	    <servlet-name>RestletServlet</servlet-name>
+	    <servlet-class>org.restlet.ext.spring.SpringServerServlet</servlet-class>
+	    <init-param>
+            <param-name>org.restlet.component</param-name>
+             <!-- this value must match the bean id of the Restlet component you will configure in Spring (below) -->
+            <param-value>restletComponent</param-value>
+     </init-param>
+	    <load-on-startup>1</load-on-startup>
+    </servlet>
+
+	<servlet-mapping>
+		<servlet-name>RestletServlet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping> 
 
  
 </web-app>

@@ -24,10 +24,15 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com" />
 		
+ 	<!-- the SpringComponent which binds us to the Restlet servlet configured above -->
+    <bean id="restletComponent" class="org.restlet.ext.spring.SpringComponent">
+         <!-- the defaultTarget for this component is our Restlet Application -->
+    	<property name="defaultTarget" ref="myRestletApplication" />
+   	</bean>
  
    	<!-- the Restlet application. This class extends "org.restlet.Application" -->
+   	<bean id="myRestletApplication" class="com.software.project.service.rest.ServerApp"/>
    	<bean class="com.software.project.util.ApplicationContextProvider"/>
-   	<bean name="ocorrenciaServiceRestBO" class="com.software.project.service.OcorrenciaServiceRestBOImp" />	
    	
 		
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
