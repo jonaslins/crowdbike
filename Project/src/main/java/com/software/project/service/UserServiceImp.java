@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +36,9 @@ public class UserServiceImp implements UserService{
 	@Resource
 	private PasswordResetTokenDAO passwordResetTokenDAO;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public List<User> getAll() {
 		return dao.all();
@@ -47,6 +52,7 @@ public class UserServiceImp implements UserService{
 
 	@Override
 	public User createUser(User user) throws Exception {
+		user.setPassword(passwordEncoder.encodePassword(user.getPassword(), null));
 		return dao.createNew(user);
 		
 	}

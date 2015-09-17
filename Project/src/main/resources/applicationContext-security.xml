@@ -43,14 +43,20 @@
 		<session-management	session-authentication-strategy-ref="sas" />
 	</http>
 
+
+
 	<beans:bean id="authProvider" class="com.software.project.beans.Authenticator">
+	  <beans:property name="passwordEncoder" ref="encoder" />
 		<aop:scoped-proxy />
 	</beans:bean>
+	
+    <beans:bean id="encoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
 
 	<beans:bean id="userSession" class="com.software.project.beans.UserSession"
 		scope="session">
 		<aop:scoped-proxy />
 	</beans:bean>
+	
 
 	<authentication-manager>
 		<authentication-provider ref="authProvider" />

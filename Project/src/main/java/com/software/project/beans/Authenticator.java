@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.software.project.entities.User;
@@ -28,6 +29,9 @@ public class Authenticator implements AuthenticationProvider {
 
 	@Autowired
 	private UserSession session;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	private String username;
 	private String password;
@@ -35,7 +39,7 @@ public class Authenticator implements AuthenticationProvider {
 
 	public void login() {
 		try {
-			User user = service.login(username, password);
+			User user = service.login(username, passwordEncoder.encodePassword(password, null));
 			if(user.isEnabled()){
 //				TODO CONTA CONFIRMADA
 			}else{
@@ -108,6 +112,8 @@ public class Authenticator implements AuthenticationProvider {
 		return false;
 	}
 
-	
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
 
 }
