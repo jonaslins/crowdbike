@@ -42,8 +42,8 @@ public class SignUpResource extends ServerResource {
 		}else{		
 			User newUser = new User(username, password, email);
 			userService.createUser(newUser);
-			
-			status = Status.USER_SUCCESSFUL_REGISTERED;			
+			userService.saveEnabledUser(newUser);
+			status = Status.USER_SUCCESSFULLY_REGISTERED;			
 		}
 		
 		String responseStr = gson.toJson(new SignUpResponse(status));
@@ -54,15 +54,17 @@ public class SignUpResource extends ServerResource {
 	class SignUpResponse {
 
 		int status;
-
+		String enumName;
+		
 		public SignUpResponse(Status status) {
 			this.status = status.getValue();
+			this.enumName =  status.toString();
 		}
 		
 	}
 
 	public enum Status {
-		USER_SUCCESSFUL_REGISTERED(1), USERNAME_EXISTS(2), USER_EMAIL_EXISTS(3), TOKEN_NOT_VALID(4);
+		USER_SUCCESSFULLY_REGISTERED(1), USERNAME_EXISTS(2), USER_EMAIL_EXISTS(3), TOKEN_NOT_VALID(4);
 
 		private int value;
 

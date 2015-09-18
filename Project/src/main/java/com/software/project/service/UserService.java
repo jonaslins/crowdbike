@@ -31,5 +31,7 @@ public interface UserService {
 	public void removePasswordResetToken(PasswordResetToken passwordResetToken)throws Exception;
 
 	public User getUserByEmail(String userEmail);
+	
+	public boolean hasRole(User user, String role);
 
 }

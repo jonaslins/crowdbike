@@ -47,6 +47,8 @@ public class Authenticator implements AuthenticationProvider {
 			}
 			loginSpringSecurity(user);
 			session.setUser(user);
+			
+			
 		    FacesContext.getCurrentInstance().getExternalContext().redirect("pages/home.jsf");
 		    return;
 		} catch (IllegalArgumentException ex) {

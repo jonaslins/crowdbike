@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.software.project.entities.User;
@@ -39,6 +40,9 @@ public class UserBean {
 	
 	@Resource
 	private UserService userService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@PostConstruct
 	public void getInit(){
@@ -78,10 +82,11 @@ public class UserBean {
     }
 	
 	public void changeUserPassword() throws Exception{
-		if(currentPassword.equals(user.getPassword())){
+		if(passwordEncoder.encodePassword(currentPassword, null).equals(user.getPassword())){
 			if(newPassword.equals(confirmPassword)){
 				user.setPassword(newPassword);
 				userService.updateUser(user);
+				addMessage("Senha atualizada com sucesso", "", FacesMessage.SEVERITY_INFO);
 			}else{
 				addMessage("Nova senha e confirmação de senha não conferem", "", FacesMessage.SEVERITY_ERROR);
 			}

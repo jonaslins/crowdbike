@@ -72,7 +72,7 @@ public class UserServiceImp implements UserService{
 
 	@Override
 	public User updateUser(User user) throws Exception {
-		// TODO Auto-generated method stub
+		user.setPassword(passwordEncoder.encodePassword(user.getPassword(), null));
 		return dao.update(user);
 	}
 	
@@ -109,6 +109,17 @@ public class UserServiceImp implements UserService{
 	public User getUserByEmail(String userEmail) {
 		// TODO Auto-generated method stub
 		return dao.getByEmail(userEmail);
+	}
+
+	@Override
+	public boolean hasRole(User user, String roleStr) {
+//		Role role = roleDAO.getByName(roleStr);
+//		List<Role> roles = user.getRoles();
+//		for (Role roleAux : roles) {
+//			if(roleAux.getDescription().equals(role.getDescription()))
+//				return true;
+//		}
+		return true;
 	}
 
 }
