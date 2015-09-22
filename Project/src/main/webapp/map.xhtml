@@ -5,6 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags"
 	template="/template/landpage_template.xhtml">
 
 	<ui:define name="pageTitle">#{message['page.map.title']}</ui:define>
@@ -12,10 +13,16 @@
 	<ui:define name="menu-links">
 		<li class="page-scroll active"><a href="map.jsf">#{message['navbar.menu.map.label']}</a></li>
 		<li class="page-scroll"><a href="index.jsf#about">#{message['navbar.menu.about.label']}</a></li>
-		<li class="page-scroll"><a href="index.jsf#login">#{message['navbar.menu.login.label']}</a></li>
+		<sec:authorize access="!isAuthenticated()">
+			<li class="page-scroll"><a href="index.jsf#login">#{message['navbar.menu.login.label']}</a></li>
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated()">
+			<li class="page-scroll"><a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">#{message['navbar.menu.logout.label']}</a></li>
+		</sec:authorize>
 	</ui:define>
 
 	<ui:define name="header">
+	
 	</ui:define>
 
 	<ui:define name="main-content">
@@ -73,37 +80,35 @@
 	</ui:define>
 
 	<ui:define name="footer">
-		<div id="map" style="height: 100%"></div>
-		<script>
-		
-			var map;
-			function initMap() {
-				map = new google.maps.Map(document.getElementById('map'), {
-					zoom : 13,
-					center : {
-						lat : -8.098277,
-						lng : -34.881256
-					}
-				});
+		<p:gmap center="-8.054277,-34.881256" id ="mapVar" widgetVar="mapVar" zoom="13" type="ROADMAP" model="#{mapBean.advancedModel}" streetView="false" style="height:100%">  
+        
+       
+        <p:ajax event="overlaySelect" listener="#{mapBean.onMarkerSelect}" />  
+  
+        <p:gmapInfoWindow>  
+            <p:outputPanel style="text-align:center;display:block;margin:auto:">
+                                             
+						<h:outputText id="endereco" value="#{mapBean.ocorrenciaSelected.endereco}" />
+						<br />
+						 <h:outputLabel for="title" value="Tipo de Acidente: "/> 
+						<h:outputText id="title" value="#{mapBean.ocorrenciaSelected.title}" />
+						<br />
+						<h:outputLabel for="inlineDate" value="Data: "/> 
+						<h:outputText  value="#{mapBean.ocorrenciaSelected.dataOcorrencia}" id="inlineDate">
+							<f:convertDateTime pattern="d-M-yyyy" />
+						</h:outputText>
 
-				map.data.setStyle(function(feature) {
-					//var color = feature.getProperty('color');			    
-					return {
-						strokeColor : '#f05f40'
-					};
-				});
+					</p:outputPanel>  
+  
+        </p:gmapInfoWindow>  
+    </p:gmap>  
+    
 
-				// NOTE: This uses cross-domain XHR, and may not work on older browsers.
-				map.data.loadGeoJson('geojson/ciclo-faixa2-0.geojson');
-			}
-		</script>
-		<script async="async" defer="defer"
-			src="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;callback=initMap">
-			
-		</script>
+
 	</ui:define>
 
 	<ui:define name="scripts">
+		<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"/>
 	</ui:define>
 
 </ui:composition>

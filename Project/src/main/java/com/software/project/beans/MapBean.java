@@ -1,10 +1,21 @@
 package com.software.project.beans;
+import java.io.File;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.Serializable;
+import java.net.URL;
 import java.text.ParseException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 
+
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.chart.PieChartModel;
@@ -12,14 +23,13 @@ import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
+import org.primefaces.model.map.Polyline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.software.project.entities.Ocorrencia;
-import com.software.project.service.OcorrenciaBO;
 import com.software.project.service.adapter.PersistenceEntity;
-import com.software.project.service.adapter.PersistenceEntityWS;
 
 @Controller("mapBean")
 @Scope("view")
@@ -48,6 +58,7 @@ public class MapBean implements Serializable {
     public void init() throws Exception{
     	
     	qtdOcorrencias = String.valueOf(persistenceEntity.countOcorrencia());
+    	
     	ocorrencias = persistenceEntity.getAll();
         if(ocorrencias.size()>0) {
          	 for (Ocorrencia ocorrencia : ocorrencias) {
@@ -56,6 +67,7 @@ public class MapBean implements Serializable {
      		}
  		}
         createPieModel();
+        createPolylines();
  
     }
     
@@ -66,6 +78,48 @@ public class MapBean implements Serializable {
     		 Marker tmp = advancedModel.getMarkers().get(i);
     		 RequestContext.getCurrentInstance().addCallbackParam("marker" + i, tmp);             
     	 }
+    }
+    
+    private void createPolylines(){
+		JSONParser parser = new JSONParser();
+		try {
+			InputStream is = getClass().getResourceAsStream("/ciclo-faixa2-0.geojson");
+
+			Reader reader = new InputStreamReader(is);
+
+			
+			Object obj = parser.parse(reader);
+
+			JSONObject jsonObject = (JSONObject) obj;
+
+			JSONArray companyList = (JSONArray) jsonObject.get("features");
+			Iterator<JSONObject> iterator = companyList.iterator();
+            while (iterator.hasNext()) {
+            	Polyline polyline = new Polyline();
+            	JSONObject aux = iterator.next();
+            	JSONObject geo = (JSONObject) aux.get("geometry");
+            	JSONArray arr = (JSONArray) geo.get("coordinates");
+            	//System.out.println(arr);
+            	
+            	Iterator<JSONArray> cordIt = arr.iterator();
+                while (cordIt.hasNext()) {
+                	JSONArray auxc = cordIt.next();
+                	double lat = Double.parseDouble(auxc.get(1).toString());
+                	double lng = Double.parseDouble(auxc.get(0).toString());
+                	System.out.println(lat+" "+ lng);
+                	polyline.getPaths().add(new LatLng(lat, lng));
+                } 
+                polyline.setStrokeWeight(2);
+                polyline.setStrokeColor("#f05f40");
+                polyline.setStrokeOpacity(1);
+                advancedModel.addOverlay(polyline);
+            }
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+       
     }
 	private void createPieModel() throws Exception {  
         pieModel = new PieChartModel();  
