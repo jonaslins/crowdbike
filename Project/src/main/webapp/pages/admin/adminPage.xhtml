@@ -52,6 +52,22 @@
 	            </h:panelGrid>
 	            </h:form>
 	        </p:tab>
+	        
+	        <p:tab title="Map Legend Management">
+	        <h:form id="legendForm">  
+	            <h:panelGrid id="panel">
+	                <p:dataTable id="singleDT" var="legend" value="#{legendBean.legendList}" selectionMode="single" selection="#{legendBean.selectedLegend}" rowKey="#{legend.id}"
+	                	paginator="true" rows="10">
+				        <p:column headerText="Id">
+				            <h:outputText value="#{legend.id}" />
+				        </p:column>
+				        <p:column headerText="Name">
+				            <h:outputText value="#{legend.name}" />
+				        </p:column>
+				    </p:dataTable>			    	
+	            </h:panelGrid>
+	            </h:form>
+	        </p:tab>
 	    </p:accordionPanel>
 	    
 	    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
