@@ -80,7 +80,9 @@
 	</ui:define>
 
 	<ui:define name="footer">
-		<p:gmap center="-8.054277,-34.881256" id ="mapVar" widgetVar="mapVar" zoom="13" type="ROADMAP" model="#{mapBean.advancedModel}" streetView="false" style="height:100%">  
+	<h:form style="height:100%" >  
+  
+    <p:gmap center="-8.054277,-34.881256" widgetVar="mapVar" zoom="13" type="ROADMAP" model="#{mapBean.advancedModel}" streetView="false" style="height:100%">  
         
        
         <p:ajax event="overlaySelect" listener="#{mapBean.onMarkerSelect}" />  
@@ -102,6 +104,10 @@
   
         </p:gmapInfoWindow>  
     </p:gmap>  
+ 
+     
+
+</h:form>  
     
 
 

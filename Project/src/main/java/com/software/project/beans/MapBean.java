@@ -59,6 +59,7 @@ public class MapBean implements Serializable {
     	
     	qtdOcorrencias = String.valueOf(persistenceEntity.countOcorrencia());
     	
+    	createPolylines();
     	ocorrencias = persistenceEntity.getAll();
         if(ocorrencias.size()>0) {
          	 for (Ocorrencia ocorrencia : ocorrencias) {
@@ -67,7 +68,6 @@ public class MapBean implements Serializable {
      		}
  		}
         createPieModel();
-        createPolylines();
  
     }
     
@@ -99,14 +99,12 @@ public class MapBean implements Serializable {
             	JSONObject aux = iterator.next();
             	JSONObject geo = (JSONObject) aux.get("geometry");
             	JSONArray arr = (JSONArray) geo.get("coordinates");
-            	//System.out.println(arr);
             	
             	Iterator<JSONArray> cordIt = arr.iterator();
                 while (cordIt.hasNext()) {
                 	JSONArray auxc = cordIt.next();
                 	double lat = Double.parseDouble(auxc.get(1).toString());
                 	double lng = Double.parseDouble(auxc.get(0).toString());
-                	System.out.println(lat+" "+ lng);
                 	polyline.getPaths().add(new LatLng(lat, lng));
                 } 
                 polyline.setStrokeWeight(2);
