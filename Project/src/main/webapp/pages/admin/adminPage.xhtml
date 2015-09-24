@@ -64,6 +64,14 @@
 				        <p:column headerText="Name">
 				            <h:outputText value="#{legend.name}" />
 				        </p:column>
+				        <f:facet name="footer">
+				        	<p:growl id="message" showDetail="true" />
+				            <p:commandButton icon="ui-icon-plus" value="Adicionar" onclick="PF('legend_dlg').show();"/>
+				            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />				         
+				            <p:commandButton value="Remover" icon="ui-icon-close" actionListener="#{legendBean.deleteLegend(legendBean.selectedLegend)}" update="message @([id$=legendForm])">						        
+						        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+						    </p:commandButton>	
+				        </f:facet>
 				    </p:dataTable>			    	
 	            </h:panelGrid>
 	            </h:form>
@@ -96,8 +104,28 @@
 		          
 			</p:dialog>
 	    </h:form>
-    	
-    	
+
+		<h:form id="addLegendForm">
+			<p:growl id="message" showDetail="true" />
+
+			<p:dialog header="Adicionar legenda" widgetVar="legend_dlg"
+				resizable="false">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="name" value="Nome(código):" />
+					<p:inputText value="#{legendBean.legendName}" id="name"
+						required="true" label="name" />
+
+					<f:facet name="footer">
+						<p:commandButton id="addBtn" value="Adicionar"
+							actionListener="#{legendBean.createLegend}"
+							update="message @([id$=legendForm])" oncomplete="PF('legend_dlg').hide();" />
+					</f:facet>
+				</h:panelGrid>
+
+			</p:dialog>
+		</h:form>
+
+
 	</ui:define>
 	
 	<ui:define name="footer">

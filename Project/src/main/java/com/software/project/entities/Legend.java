@@ -20,6 +20,13 @@ public class Legend{
 	
 	@Column(name="legend_name")
 	private String name;
+	
+	public Legend() {
+	}
+	
+	public Legend(String name) {
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;
