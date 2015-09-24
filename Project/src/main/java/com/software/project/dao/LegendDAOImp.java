@@ -17,9 +17,9 @@ public class LegendDAOImp extends GenericDAOImp<Legend, Long> implements LegendD
 	@Override
 	public Legend getByCode(String code) {
 		// TODO Auto-generated method stub
-		String query = "FROM Legend l where l.code = :code";
+		String query = "FROM Legend l where l.name = :name";
 		Query q = getEntityManager().createQuery(query);
-		q.setParameter("code", code);
+		q.setParameter("name", code);
 		
 		List l = q.getResultList();
 		if (l == null || l.isEmpty() || l.size() > 1) {

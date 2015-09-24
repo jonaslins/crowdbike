@@ -5,9 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.springframework.security.core.GrantedAuthority;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="legends")
@@ -18,7 +16,8 @@ public class Legend{
 	@Column(name="legend_id")
 	private Long id;
 	
-	@Column(name="legend_name")
+	@Size(min=1)
+	@Column(name="legend_name", unique=true, nullable=false)
 	private String name;
 	
 	public Legend() {
