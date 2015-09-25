@@ -16,8 +16,9 @@ Feature: Legend
 	    
 	Scenario: new legend web
 	    Given I am at the Admin Page
+	    When I click the add legend button
 	    And I fill the name field with "foo2"
-	    And I click the create button
+	    And I click the create legend button
 	    Then a message indicating the legend was successfully stored is displayed
 	    
 	Scenario: delete legend

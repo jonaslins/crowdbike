@@ -16,6 +16,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.software.project.entities.Legend;
+import com.software.project.functional.AdminPage;
 import com.software.project.functional.HomePage;
 import com.software.project.functional.IndexPage;
 import com.software.project.functional.ResetPasswordPage;
@@ -102,40 +103,39 @@ public class LegendSteps {
 	    
 	}
 
-	@Given("^I am at the Admin Page$")
-	public void i_am_at_the_Admin_Page() throws Throwable {
-	    //TODO
-	    
-	}
-
-	@Given("^I fill the name field with \"(.*?)\"$")
-	public void i_fill_the_name_field_with(String legendName) throws Throwable {
-	    //TODO
-	    
-	}
-
-	@Given("^I click the create button$")
-	public void i_click_the_create_button() throws Throwable {
-	    //TODO
-	    
-	}
-
-	@Then("^a message indicating the legend was successfully stored is displayed$")
-	public void a_message_indicating_the_legend_was_successfully_stored_is_displayed() throws Throwable {
-	    //TODO
-	    
-	}
-
 	@When("^I try to delete a legend with name \"(.*?)\"$")
 	public void i_try_to_delete_a_legend_with_name(String legendName) throws Throwable {
 		Legend legend = legendService.getLegendByCode(legendName);
 		legendService.deleteLegend(legend);	    
+	}	
+	
+	@Given("^I am at the Admin Page$")
+	public void i_am_at_the_Admin_Page() throws Throwable {
+		//Go.to(AdminPage.URL);
+		//At.page(AdminPage.URL);
 	}
 
-	@Then("^the legend is not stored in the system$")
-	public void the_legend_is_not_stored_in_the_system() throws Throwable {
-	    //TODO
+	@When("^I click the add legend button$")
+	public void i_click_the_add_legend_button() throws Throwable {
 	    
+		//AdminPage.clickAddLegendBtn();
 	}
 
+	@When("^I fill the name field with \"(.*?)\"$")
+	public void i_fill_the_name_field_with(String name) throws Throwable {
+	    
+		//AdminPage.fillLegendForm(name);
+	}
+
+	@When("^I click the create legend button$")
+	public void i_click_the_create_legend_button() throws Throwable {
+	    
+	   //AdminPage.clickCreateLegendBtn();
+	}
+
+	@Then("^a message indicating the legend was successfully stored is displayed$")
+	public void a_message_indicating_the_legend_was_successfully_stored_is_displayed() throws Throwable {
+		//assertTrue(AdminPage.checkSuccessfullyCreatedMsg());
+	}
+	
 }

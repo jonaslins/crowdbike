@@ -24,7 +24,4 @@ public class HomePage extends WebPage {
 		return loggedInAtGui;
 	}
 	
-	
-	
-	
 }
