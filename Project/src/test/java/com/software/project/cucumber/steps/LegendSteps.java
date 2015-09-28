@@ -58,9 +58,12 @@ public class LegendSteps {
 		Go.setDriver(driver);
 		At.setDriver(driver);
 		PageFactory.initElements(driver, IndexPage.class);
-		PageFactory.initElements(driver, HomePage.class);
-		PageFactory.initElements(driver, SignUpPage.class);
-		PageFactory.initElements(driver, ResetPasswordPage.class);
+		PageFactory.initElements(driver, AdminPage.class);
+		
+		Go.to(IndexPage.URL);
+		At.page(IndexPage.URL);
+		IndexPage.fillLoginForm("admin", "admin");
+		IndexPage.clickLoginButton();
 		
 
 	}
