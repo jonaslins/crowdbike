@@ -17,7 +17,7 @@
 	</ui:define>
 	
 	<ui:define name="content">
- 	    <p:accordionPanel multiple="true" id="accordPanel">
+ 	    <p:accordionPanel multiple="true" id="accordPanel" activeIndex="1,2,3">
  	    
  	     	<p:tab title="Admin Info">
  	        	<h:outputLabel for="username" value="Username: " />    		
@@ -83,7 +83,7 @@
 	        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
     	</p:confirmDialog>
     	<h:form id="addForm">           
-		    		<p:growl id="message" showDetail="true" />
+		    		<p:growl id="message" showDetail="true"  sticky="true"/>
 		    
 	    	<p:dialog header="Adicionar usuário" widgetVar="dlg" resizable="false">		   
 		        <h:panelGrid columns="2" cellpadding="5">  

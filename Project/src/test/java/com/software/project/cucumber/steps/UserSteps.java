@@ -13,6 +13,7 @@ import org.junit.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,9 +35,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-@ContextConfiguration(locations = { "classpath:cucumber.xml" })
-@WebAppConfiguration
-public class UserSteps {
+
+public class UserSteps extends Steps{
 
 	@Autowired
 	public UserService userService;

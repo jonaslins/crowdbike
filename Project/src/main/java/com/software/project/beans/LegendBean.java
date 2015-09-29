@@ -56,6 +56,7 @@ public class LegendBean {
 	public void createLegend(){
 		try {
 			Legend newLegend = legendService.createLegend(legendName);
+			addMessage("Legenda adicionada", "Operação realizada com sucesso", FacesMessage.SEVERITY_INFO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

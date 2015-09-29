@@ -25,7 +25,7 @@ public class AdminPage extends WebPage {
 	@FindBy(id="addLegendForm:addBtn")
 	private static WebElement createLegendBtn;
 	
-	private final static String legendMessagesId = "accordPanel:legendForm:singleDT:message";
+	private final static String legendMessagesId = "addLegendForm:message_container";
 
 	public static void clickAddLegendBtn() {
 		addLegendBtn.click();
@@ -40,7 +40,7 @@ public class AdminPage extends WebPage {
 	}
 
 	public static boolean checkSuccessfullyCreatedMsg() {
-		return messageContains(legendMessagesId, "Check your email inbox");
+		return messageContains(legendMessagesId, "Operação realizada com sucesso");
 	}
 	
 }
