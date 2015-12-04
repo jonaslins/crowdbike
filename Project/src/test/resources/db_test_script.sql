@@ -14,6 +14,9 @@ MySQL - 5.6.26-log : Database - db_test
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `db_test.legends` */
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
 SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `db_test.legends`;
 

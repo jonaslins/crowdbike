@@ -22,7 +22,13 @@ import cucumber.api.junit.Cucumber;
 public class RunCucumber {
 
 	@BeforeClass
-	public static void preparaBase() throws IOException {
+	public static void setup(){
+		
+	}
+	
+	
+	
+	public static void setupBD() throws IOException {
 
 		Resource propertiesResource = new ClassPathResource("/application-test.properties");
 		Properties properties = PropertiesLoaderUtils.loadProperties(propertiesResource);
