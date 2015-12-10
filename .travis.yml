@@ -16,7 +16,7 @@ before_install:
 
 before_script:
 
-    - mysql -e 'CREATE DATABASE db_test;'
+    #- mysql -e 'CREATE DATABASE db_test;'
     - cat src/test/resources/db_test_script.sql | mysql -uroot
 
 script:
