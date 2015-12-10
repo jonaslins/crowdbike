@@ -16,8 +16,7 @@ before_install:
 
 before_script:
 
-    #- mysql -e 'CREATE DATABASE db_test;'
-    - cat src/test/resources/db_test_script.sql | mysql -uroot
+    - mysql < src/test/resources/db_test_script.sql -uroot 
 
 script:
     - mvn clean install -Denv=test

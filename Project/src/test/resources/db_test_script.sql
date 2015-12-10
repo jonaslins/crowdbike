@@ -17,22 +17,9 @@ MySQL - 5.6.26-log : Database - db_test
 
 CREATE DATABASE IF NOT EXISTS db_test;
 
-
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-
-
+USE 'db_test';
 
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS `db_test.legends`;
-
-CREATE TABLE `db_test.legends` (
-  `legend_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `legend_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`legend_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
-/*Data for the table `db_test.legends` */
 
 /*Table structure for table `legends` */
 
