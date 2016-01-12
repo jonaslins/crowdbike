@@ -16,7 +16,7 @@ import com.software.project.service.adapter.AdapterOcurrence;
 
 public class TestRetrieveAllOcurrences {
 
-	@Test
+	/*@Test
 	public void testGetAll() throws Exception {
 		Gson gson;
 		String uri = "http://148.6.80.19:1026/v1/contextEntities";
@@ -55,7 +55,7 @@ public class TestRetrieveAllOcurrences {
 	    
 	 //   JSONAssert.assertEquals(s, result, false);
 	}
-	
+	*/
 	
 
 }

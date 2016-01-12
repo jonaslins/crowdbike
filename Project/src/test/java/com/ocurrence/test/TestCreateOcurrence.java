@@ -24,7 +24,7 @@ import com.software.project.service.adapter.AdapterOcurrence;
 
 public class TestCreateOcurrence {
 
-	@Before
+/*	@Before
 	public void setUp() throws Exception {
 	}
 
@@ -98,7 +98,7 @@ public class TestCreateOcurrence {
 	    		"{\"code\" : \"200\",\"reasonPhrase\" : \"OK\"}}]}";
 	    
 	    
-	}
+	}*/
 
 
 }

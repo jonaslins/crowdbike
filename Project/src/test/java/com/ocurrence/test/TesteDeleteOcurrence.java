@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 
 
 public class TesteDeleteOcurrence {
-
+/*
 	@Test
 	public void delete()  {
 		String uri = "http://148.6.80.19:1026/v1/contextEntities/358";
@@ -47,6 +47,6 @@ public class TesteDeleteOcurrence {
 	   
 	   
 	
-	}
+	}*/
 
 }

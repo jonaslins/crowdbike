@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class TestRetrieveOcurrence {
 
-	@Test
+/*	@Test
 	public void testGetById() {
 		String uri = "http://148.6.80.19:1026/v1/contextEntities/358";
 		int responseCode = 0;
@@ -66,6 +66,6 @@ public class TestRetrieveOcurrence {
 	   
 	   
 	
-	}
+	}*/
 
 }
